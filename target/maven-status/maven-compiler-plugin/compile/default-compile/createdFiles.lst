@@ -1,0 +1,16 @@
+com\untis\bems\configure\database\AgentDatabaseConfig.class
+com\untis\bems\mapper\support\AgentMapper.class
+com\untis\bems\configure\database\DatabaseProperties.class
+com\untis\bems\configure\database\MasterDatabaseProperties.class
+com\untis\bems\mapper\support\MasterMapper.class
+META-INF\spring-configuration-metadata.json
+com\untis\bems\configure\database\DatabaseConfig.class
+com\untis\bems\broker\AgentController.class
+com\untis\bems\configure\database\AgentDatabaseProperties.class
+com\untis\bems\domain\PointList.class
+com\untis\bems\configure\database\MasterDatabaseConfig.class
+com\untis\bems\BemsAdaptorApplication.class
+com\untis\bems\configure\mybatis\MyBatisConfig.class
+com\untis\bems\mapper\adaptor\PointMapper.class
+com\untis\bems\configure\mybatis\AgentMyBatisConfig.class
+com\untis\bems\configure\mybatis\MasterMyBatisConfig.class

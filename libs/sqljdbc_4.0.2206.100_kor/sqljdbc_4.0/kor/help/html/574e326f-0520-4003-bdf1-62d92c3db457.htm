@@ -1,0 +1,173 @@
+﻿<html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" /><META NAME="save" CONTENT="history" /><title>XA 트랜잭션 이해</title><meta name="Language" content="ko-kr" /><meta name="System.Keywords" content="분산 트랜잭션" /><meta name="System.Keywords" content="XA 트랜잭션" /><meta name="Microsoft.Help.Id" content="574e326f-0520-4003-bdf1-62d92c3db457" /><meta name="Description" content="SQL Server용 Microsoft JDBC Driver는 Java Platform, Enterprise Edition/JDBC 2.0 분산 트랜잭션(옵션)을 지원합니다. SQLServerXADataSource 클래스에서 가져온 JDBC 연결은 Java Platform, Enterprise Edition(Java EE) 응용 프로그램 서버와 같은 표준 분산 트랜잭션 처리 환경에 참여할 수 있습니다." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><link rel="stylesheet" type="text/css" href="../local/Classic.css" /><script type="text/javascript" src="../scripts/EventUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/SplitScreen.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/Dropdown.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_manifold.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_feedBack.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CheckboxMenu.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CommonUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../local/script_main.js">&amp;nbsp;</script></head><body><div id="header"><table id="bottomTable" cellpadding="0" cellspacing="0"><tr><td align="left"><span id="headerBold">XA 트랜잭션 이해</span></td></tr></table><table id="gradientTable"><tr><td class="nsrBottom" background="../icons/gradient.gif" /></tr></table></div><div id="mainSection"><div id="mainBody"><div class="introduction"><p>SQL Server용 Microsoft JDBC Driver는 Java Platform, Enterprise Edition/JDBC 2.0 분산 트랜잭션(옵션)을 지원합니다. <a href="95fc7b07-2498-4a7e-8f7f-ee0d86b598b4.htm">SQLServerXADataSource</a> 클래스에서 가져온 JDBC 연결은 Java Platform, Enterprise Edition(Java EE) 응용 프로그램 서버와 같은 표준 분산 트랜잭션 처리 환경에 참여할 수 있습니다.</p></div><h1 class="heading">설명</h1><div id="sectionSection0" class="section" name="collapseableSection" style=""><p>분산 트랜잭션을 구현하는 데 필요한 클래스는 다음과 같습니다.</p><div class="tableSection"><table width="50%" cellspacing="2" cellpadding="5" frame="lhs"><tr><th><p>클래스</p></th><th><p>구현</p></th><th><p>설명</p></th></tr><tr><td><p>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</p></td><td><p>javax.sql.XADataSource</p></td><td><p>분산 연결용 클래스 팩터리입니다.</p></td></tr><tr><td><p>com.microsoft.sqlserver.jdbc.SQLServerXAResource</p></td><td><p>javax.transaction.xa.XAResource</p></td><td><p>트랜잭션 관리자용 리소스 어댑터입니다.</p></td></tr></table></div><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p>XA 분산 트랜잭션 연결의 기본값은 커밋된 읽기 격리 수준입니다.</p></div></div><h1 class="heading">XA 트랜잭션 사용과 관련된 지침 및 제한 사항</h1><div id="sectionSection1" class="section" name="collapseableSection" style=""><p>다음은 밀접하게 결합된 트랜잭션에 적용되는 추가 지침입니다.</p><ul><li><p>XA 트랜잭션을 MS DTC(Microsoft Distributed Transaction Coordinator)와 함께 사용할 경우 MS DTC의 현재 버전이 밀접하게 결합된 XA 분기 동작을 지원하지 않습니다. 예를 들어 MS DTC에는 XID(XA 분기 트랜잭션 ID)와 MS DTC 트랜잭션 ID 간에 일 대 일 매핑이 있으며 느슨하게 연결된 XA 분기에서 수행되는 작업이 다른 작업과 격리됩니다.</p><p><a href="http://support.microsoft.com/kb/938653">MSDTC 및 밀접하게 결합된 트랜잭션</a>에서 제공하는 핫픽스는 같은 GTRID(전역 트랜잭션 ID)를 사용하는 여러 개의 XA 분기가 한 개의 MS DTC 트랜잭션 ID에 매핑되는 밀접하게 결합된 XA 분기를 지원합니다. 이러한 지원을 통해 밀접하게 결합된 XA 분기가 SQL Server와 같은 리소스 관리자에서 다른 XA 분기의 변경 내용을 확인할 수 있습니다.</p></li><li><p><a href="379857c3-9de1-4964-8782-32df317cbfbb.htm">SSTRANSTIGHTLYCPLD</a> 플래그를 사용하면 BQUAL(XA 분기 트랜잭션 ID)은 다르지만 GTRID(전역 트랜잭션 ID) 및 FormatID(형식 ID)는 같은 밀접하게 결합된 XA 트랜잭션을 응용 프로그램에서 사용할 수 있습니다. 이 기능을 사용하려면 <b>XAResource.start</b> 메서드의 <b>flags</b> 매개 변수에 <a href="379857c3-9de1-4964-8782-32df317cbfbb.htm">SSTRANSTIGHTLYCPLD</a>를 설정해야 합니다.</p><div class="sampleCode"><span codeLanguage="other"><pre>xaRes.start(xid, SQLServerXAResource.SSTRANSTIGHTLYCPLD);</pre></span></div></li></ul></div><h1 class="heading">구성 지침</h1><div id="sectionSection2" class="section" name="collapseableSection" style=""><p>MS DTC(Microsoft Distributed Transaction Coordinator)와 XA 데이터 원본을 함께 사용하여 분산 트랜잭션을 처리하려면 다음과 같은 단계가 필요합니다.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p>JDBC 분산 트랜잭션 구성 요소는 JDBC 드라이버 설치의 xa 디렉터리에 있습니다. 이 구성 요소에는 xa_install.sql 및 sqljdbc_xa.dll 파일이 포함됩니다.</p></div><h1 class="heading">MS DTC 서비스 실행</h1><div class="subsection"><p>MS DTC 서비스는 서비스 관리자에서 <span class="ui">자동</span>으로 표시하여 SQL Server 서비스를 시작할 때 자동으로 실행되도록 해야 합니다. XA 트랜잭션에 대해 MS DTC를 활성화하려면 다음 단계를 따릅니다.</p><p>Windows Vista 이상:</p><ol><li><p><span class="ui">시작</span> 단추를 클릭하고 <span class="ui">검색</span> 시작 상자에 <span class="input">dcomcnfg</span>를 입력한 다음 Enter 키를 눌러 <span class="ui">구성 요소 서비스</span>를 엽니다. <span class="ui">검색</span><span class="ui">시작</span> 상자에 %windir%\system32\comexp.msc를 입력하여 <span class="ui">구성 요소 서비스</span>를 열 수도 있습니다.</p></li><li><p>구성 요소 서비스, 컴퓨터, 내 컴퓨터를 확장한 다음 Distributed Transaction Coordinator를 확장합니다.</p></li><li><p><span class="ui">로컬 DTC</span>를 마우스 오른쪽 단추로 클릭한 다음 <span class="ui">속성</span>을 선택합니다.</p></li><li><p><span class="ui">로컬 DTC 속성</span> 대화 상자의 <span class="ui">보안</span> 탭을 클릭합니다.</p></li><li><p><span class="ui">XA 트랜잭션 사용</span> 확인란을 선택하고 <span class="ui">확인</span>을 클릭합니다. 이렇게 하면 MS DTC 서비스가 다시 시작됩니다.</p></li><li><p><span class="ui">확인</span>을 다시 클릭하여 <span class="ui">속성</span> 대화 상자를 닫은 후 <span class="ui">구성 요소 서비스</span>를 닫습니다.</p></li><li><p>SQL Server를 중지한 후 다시 시작하여 MS DTC 변경 내용과 동기화되도록 합니다.</p></li></ol></div><h1 class="heading">JDBC 분산 트랜잭션 구성 요소 구성</h1><div class="subsection"><p>다음과 같은 단계를 통해 JDBC 드라이버 분산 트랜잭션 구성 요소를 구성할 수 있습니다.</p><ol><li><p>JDBC 드라이버 설치 디렉터리에 있는 새 sqljdbc_xa.dll을 분산 트랜잭션에 참여할 모든 SQL Server 컴퓨터의 Binn 디렉터리에 복사합니다.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p> 32비트 SQL Server에서 XA 트랜잭션을 사용할 경우 SQL Server가 x64 프로세서에 설치되었더라도 x86 폴더에 있는 sqljdbc_xa.dll을 사용하십시오. x64 프로세서의 64비트 SQL Server에서 XA 트랜잭션을 사용할 경우 x64 폴더에 있는 sqljdbc_xa.dll을 사용하십시오.</p></div></li><li><p>분산 트랜잭션에 참여할 모든 SQL Server 인스턴스에서 데이터베이스 스크립트 xa_install.sql을 실행합니다. 이 스크립트는 sqljdbc_xa.dll에서 호출하는 확장 저장 프로시저를 설치합니다. 이 확장 저장 프로시저는 SQL Server용 Microsoft JDBC Driver에 대한 분산 트랜잭션 및 XA 지원을 구현합니다. 이 스크립트를 실행하려면 SQL Server 인스턴스의 관리자 권한이 필요합니다.</p></li><li><p>특정 사용자에게 JDBC 드라이버를 통해 분산 트랜잭션에 참여할 권한을 부여하려면 해당 사용자를 SqlJDBCXAUser 역할에 추가합니다.</p></li></ol><p>SQL Server 인스턴스마다 한 번에 하나의 sqljdbc_xa.dll 어셈블리 버전만 구성할 수 있습니다. 응용 프로그램에서 여러 버전의 JDBC 드라이버를 사용하여 XA 연결을 통해 동일한 SQL Server 인스턴스에 연결해야 하는 경우가 있을 수 있습니다. 이 경우 최신 JDBC 드라이버와 함께 제공되는 sqljdbc_xa.dll을 SQL Server 인스턴스에 설치해야 합니다.</p><p>현재 SQL Server SQL Server 인스턴스에 설치되어 있는 sqljdbc_xa.dll 버전은 다음 세 가지 방법으로 확인할 수 있습니다.</p><ol><li><p>분산 트랜잭션에 참여할 SQL Server 컴퓨터의 LOG 디렉터리를 엽니다. SQL Server "ERRORLOG" 파일을 선택하여 엽니다. "ERRORLOG" 파일에서 "Using 'SQLJDBC_XA.dll' version ..." 구를 검색합니다.</p></li><li><p>분산 트랜잭션에 참여할 SQL Server 컴퓨터의 Binn 디렉터리를 엽니다. sqljdbc_xa.dll 어셈블리를 선택합니다. </p><ul><li><p>Windows Vista 이상의 경우 sqljdbc_xa.dll을 마우스 오른쪽 단추로 클릭한 다음 속성을 선택합니다. 그런 다음 <span class="ui">자세히</span> 탭을 클릭합니다. <span class="ui">파일 버전</span> 필드에 현재 SQL Server 인스턴스에 설치되어 있는 sqljdbc_xa.dll 버전이 표시됩니다. </p></li></ul></li><li><p>다음 섹션의 코드 예제에서와 같이 로깅 기능을 설정합니다. 출력 로그 파일에서 "Server XA DLL version:..." 구를 검색합니다.</p></li></ol></div><h1 class="heading">sqljdbc_xa.dll 업그레이드</h1><div class="subsection"><p>새 버전의 JDBC 드라이버를 설치할 때 서버에서 sqljdbc_xa.dll을 업그레이드하기 위해 새 버전의 sqljdbc_xa.dll을 사용해야 합니다.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p>유지 관리 창에 있는 동안 또는 프로세스에 MS DTC 트랜잭션이 없을 때 sqljdbc_xa.dll을 업그레이드해야 합니다.</p></div><ol><li><p>Transact-SQL 명령 <b>DBCC sqljdbc_xa (FREE)</b>를 사용하여 sqljdbc_xa.dll을 언로드합니다.</p></li><li><p>JDBC 드라이버 설치 디렉터리에 있는 새 sqljdbc_xa.dll을 분산 트랜잭션에 참여할 모든 SQL Server 컴퓨터의 Binn 디렉터리에 복사합니다.</p><p>sqljdbc_xa.dll의 확장 프로시저가 호출되면 새 DLL이 로드됩니다. 새 정의를 로드하기 위해 SQL Server를 다시 시작할 필요가 없습니다.</p></li></ol></div><h1 class="heading">사용자 정의 역할 구성</h1><div class="subsection"><p>특정 사용자에게 JDBC 드라이버를 통해 분산 트랜잭션에 참여할 권한을 부여하려면 해당 사용자를 SqlJDBCXAUser 역할에 추가합니다. 예를 들어 다음과 같은 Transact-SQL 코드를 사용하여 이름이 'shelby'(SQL 표준 로그인 사용자 이름)인 사용자를 SqlJDBCXAUser 역할에 추가합니다.</p><div class="sampleCode"><span codeLanguage="other"><pre>USE master
+GO
+EXEC sp_grantdbaccess 'shelby', 'shelby'
+GO
+EXEC sp_addrolemember [SqlJDBCXAUser], 'shelby'</pre></span></div><p>SQL 사용자 정의 역할은 데이터베이스별로 정의합니다. 보안을 위해 고유한 역할을 만들려면 각 데이터베이스마다 역할을 정의하고 각 데이터베이스의 방식대로 사용자를 추가해야 합니다. SqlJDBCXAUser 역할은 master에 상주하는 SQL JDBC 확장 저장 프로시저에 대한 액세스 권한을 부여하는 데 사용되므로 master 데이터베이스에서만 정의할 수 있습니다. 먼저 개별 사용자에게 master에 대한 액세스 권한을 부여한 다음 master 데이터베이스에 로그인된 상태에서 SqlJDBCXAUser 역할에 대한 액세스 권한을 부여해야 합니다.</p></div></div><h1 class="heading">예</h1><div id="sectionSection3" class="section" name="collapseableSection" style=""><div class="sampleCode"><span codeLanguage="other"><pre>import java.net.Inet4Address;
+import java.sql.*;
+import java.util.Random;
+import javax.transaction.xa.*;
+import javax.sql.*;
+import com.microsoft.sqlserver.jdbc.*;
+
+public class testXA {
+
+   public static void main(String[] args) throws Exception {
+
+      // Create variables for the connection string.
+      String prefix = "jdbc:sqlserver://";
+      String serverName = "localhost";
+      int portNumber = 1433;
+      String databaseName = "AdventureWorks"; 
+      String user = "UserName"; 
+      String password = "*****";
+      String connectionUrl = prefix + serverName + ":" + portNumber
+         + ";databaseName=" + databaseName + ";user=" + user + ";password=" + password;
+
+      try {
+         // Establish the connection.
+         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+         Connection con = DriverManager.getConnection(connectionUrl);
+
+         // Create a test table.
+         Statement stmt = con.createStatement();
+         try {
+            stmt.executeUpdate("DROP TABLE XAMin"); 
+         }
+         catch (Exception e) {
+         }
+         stmt.executeUpdate("CREATE TABLE XAMin (f1 int, f2 varchar(max))");
+         stmt.close();
+         con.close();
+
+         // Create the XA data source and XA ready connection.
+         SQLServerXADataSource ds = new SQLServerXADataSource();
+         ds.setUser(user);
+         ds.setPassword(password);
+         ds.setServerName(serverName);
+         ds.setPortNumber(portNumber);
+         ds.setDatabaseName(databaseName);
+         XAConnection xaCon = ds.getXAConnection();
+         con = xaCon.getConnection();
+
+         // Get a unique Xid object for testing.
+         XAResource xaRes = null;
+         Xid xid = null;
+         xid = XidImpl.getUniqueXid(1);
+
+         // Get the XAResource object and set the timeout value.
+         xaRes = xaCon.getXAResource();
+         xaRes.setTransactionTimeout(0);
+
+         // Perform the XA transaction.
+         System.out.println("Write -&gt; xid = " + xid.toString());
+         xaRes.start(xid,XAResource.TMNOFLAGS);
+         PreparedStatement pstmt = 
+         con.prepareStatement("INSERT INTO XAMin (f1,f2) VALUES (?, ?)");
+         pstmt.setInt(1,1);
+         pstmt.setString(2,xid.toString());
+         pstmt.executeUpdate();
+
+         // Commit the transaction.
+         xaRes.end(xid,XAResource.TMSUCCESS);
+         xaRes.commit(xid,true);
+
+         // Cleanup.
+         con.close();
+         xaCon.close();
+
+         // Open a new connection and read back the record to verify that it worked.
+         con = DriverManager.getConnection(connectionUrl);
+         ResultSet rs = con.createStatement().executeQuery("SELECT * FROM XAMin");
+         rs.next();
+         System.out.println("Read -&gt; xid = " + rs.getString(2));
+         rs.close();
+         con.close();
+      } 
+
+      // Handle any errors that may have occurred.
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+}
+
+
+class XidImpl implements Xid {
+
+   public int formatId;
+   public byte[] gtrid;
+   public byte[] bqual;
+   public byte[] getGlobalTransactionId() {return gtrid;}
+   public byte[] getBranchQualifier() {return bqual;}
+   public int getFormatId() {return formatId;}
+
+   XidImpl(int formatId, byte[] gtrid, byte[] bqual) {
+      this.formatId = formatId;
+      this.gtrid = gtrid;
+      this.bqual = bqual;
+   }
+
+   public String toString() {
+      int hexVal;
+      StringBuffer sb = new StringBuffer(512);
+      sb.append("formatId=" + formatId);
+      sb.append(" gtrid(" + gtrid.length + ")={0x");
+      for (int i=0; i&lt;gtrid.length; i++) {
+         hexVal = gtrid[i]&amp;0xFF;
+         if ( hexVal &lt; 0x10 )
+            sb.append("0" + Integer.toHexString(gtrid[i]&amp;0xFF));
+         else
+            sb.append(Integer.toHexString(gtrid[i]&amp;0xFF));
+         }
+         sb.append("} bqual(" + bqual.length + ")={0x");
+         for (int i=0; i&lt;bqual.length; i++) {
+            hexVal = bqual[i]&amp;0xFF;
+            if ( hexVal &lt; 0x10 )
+               sb.append("0" + Integer.toHexString(bqual[i]&amp;0xFF));
+            else
+               sb.append(Integer.toHexString(bqual[i]&amp;0xFF));
+         }
+         sb.append("}");
+         return sb.toString();
+      }
+
+      // Returns a globally unique transaction id.
+      static byte [] localIP = null;
+      static int txnUniqueID = 0;
+      static Xid getUniqueXid(int tid) {
+
+      Random rnd = new Random(System.currentTimeMillis());
+      txnUniqueID++;
+      int txnUID = txnUniqueID;
+      int tidID = tid;
+      int randID = rnd.nextInt();
+      byte[] gtrid = new byte[64];
+      byte[] bqual = new byte[64];
+      if ( null == localIP) {
+         try {
+            localIP = Inet4Address.getLocalHost().getAddress();
+         }
+         catch ( Exception ex ) {
+            localIP =  new byte[] { 0x01,0x02,0x03,0x04 };
+         }
+      }
+      System.arraycopy(localIP,0,gtrid,0,4);
+      System.arraycopy(localIP,0,bqual,0,4);
+
+      // Bytes 4 -&gt; 7 - unique transaction id.
+      // Bytes 8 -&gt;11 - thread id.
+      // Bytes 12-&gt;15 - random number generated by using seed from current time in milliseconds.
+      for (int i=0; i&lt;=3; i++) {
+         gtrid[i+4] = (byte)(txnUID%0x100);
+         bqual[i+4] = (byte)(txnUID%0x100);
+         txnUID &gt;&gt;= 8;
+         gtrid[i+8] = (byte)(tidID%0x100);
+         bqual[i+8] = (byte)(tidID%0x100);
+         tidID &gt;&gt;= 8;
+         gtrid[i+12] = (byte)(randID%0x100);
+         bqual[i+12] = (byte)(randID%0x100);
+         randID &gt;&gt;= 8;
+      }
+      return new XidImpl(0x1234, gtrid, bqual);
+   }
+}</pre></span></div></div><span id="seeAlsoSpan"><h1 class="heading">참고 항목</h1></span><div id="seeAlsoSection" class="section" name="collapseableSection" style=""><div class="seeAlsoStyle"><span sdata="link"><a href="afbb776f-05dc-4e79-bb25-2c340483e401.htm">JDBC 드라이버로 트랜잭션 수행</a></span></div></div></div><div id="footer" class="section"><span id="feedbackarea">이 항목에 대한 <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','8.0.12060.10000','%0\d의견을%20보내주셔서%20감사합니다.%20개발자%20작성%20팀에서는%20설명서를%20보완하는%20데%20보내주신%20의견을%20적극%20활용하고%20있습니다.%20보내주신%20의견을%20검토하는%20동안%20명확한%20설명이%20필요하거나%20해결책에%20대한%20추가%20의견을%20묻는%20전자%20메일을%20받을%20수%20있습니다.%20귀하의%20전자%20메일은%20기타%20다른%20용도로%20사용되지%20않고%20검토가%20끝난%20후%20바로%20폐기됩니다.%0\AMicrosoft의%20개인%20정보%20취급%20방침에%20대한%20자세한%20내용은%20http://privacy.microsoft.com/ko-kr/default.aspx를%20참조하십시오.%0\A%0\d','고객%20의견');">사용자 의견</a>을 Microsoft로 보내 주십시오.</span><span id="copyrightarea"><p><a href="9bad553b-9e70-4696-8499-2e35f772a1e0.htm">© 2012 Microsoft. All rights reserved.</a></p></span></div></div></body></html>

@@ -1,0 +1,32 @@
+﻿<html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" /><META NAME="save" CONTENT="history" /><title>다중 결과 집합 사용</title><meta name="Language" content="ko-kr" /><meta name="System.Keywords" content="다중 결과 집합" /><meta name="Microsoft.Help.Id" content="ab6a3cfa-073b-44e9-afca-a8675cfe5fd1" /><meta name="Description" content="둘 이상의 결과 집합을 반환하는 인라인 SQL 또는 SQL Server 저장 프로시저를 사용하는 경우 SQL Server용 Microsoft JDBC Driver는 반환된 각 데이터 집합을 검색할 수 있도록 SQLServerStatement 클래스에 getResultSet 메서드를 제공합니다. 또한 결과 집합을 둘 이상 반환하는 문을 실행하는 경우에는 SQLServerStatement 클래스의 execute 메서드를 사용합니다." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><link rel="stylesheet" type="text/css" href="../local/Classic.css" /><script type="text/javascript" src="../scripts/EventUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/SplitScreen.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/Dropdown.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_manifold.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_feedBack.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CheckboxMenu.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CommonUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../local/script_main.js">&amp;nbsp;</script></head><body><div id="header"><table id="bottomTable" cellpadding="0" cellspacing="0"><tr><td align="left"><span id="headerBold">다중 결과 집합 사용</span></td></tr></table><table id="gradientTable"><tr><td class="nsrBottom" background="../icons/gradient.gif" /></tr></table></div><div id="mainSection"><div id="mainBody"><div class="introduction"><p>둘 이상의 결과 집합을 반환하는 인라인 SQL 또는 SQL Server 저장 프로시저를 사용하는 경우 SQL Server용 Microsoft JDBC Driver는 반환된 각 데이터 집합을 검색할 수 있도록 <a href="ec24963c-8b51-4838-91e9-1fbfa2347451.htm">SQLServerStatement</a> 클래스에 <a href="929a14e2-8e98-4c32-89aa-86733c717ec1.htm">getResultSet</a> 메서드를 제공합니다. 또한 결과 집합을 둘 이상 반환하는 문을 실행하는 경우에는 <b>SQLServerStatement</b> 클래스의 <a href="e1367f39-23d7-4e26-b160-6d988d7e6988.htm">execute</a> 메서드를 사용합니다. 이는 반환된 값이 결과 집합인지 업데이트 횟수인지를 나타내는 <span sdata="langKeyword" value="boolean"><span class="keyword">boolean</span></span>값을 반환합니다. </p><p><b>execute</b> 메서드가 <span sdata="langKeyword" value="true"><span class="keyword">true</span></span>를 반환하면 실행한 문은 하나 이상의 결과 집합을 반환합니다. <b>getResultSet</b> 메서드를 호출하면 첫 번째 결과 집합에 액세스할 수 있습니다. 추가 결과 집합이 있는지 확인하려면 추가 결과 집합이 있을 때 <span sdata="langKeyword" value="boolean"><span class="keyword">boolean</span></span> 값 <span sdata="langKeyword" value="true"><span class="keyword">true</span></span>를 반환하는 <a href="6b18510a-4d6d-4eeb-a9d0-32e920eb0048.htm">getMoreResults</a> 메서드를 호출합니다. 추가 결과 집합이 있는 경우 다시 <b>getResultSet</b> 메서드를 호출하여 액세스할 수 있으며 모든 결과 집합을 처리할 때까지 프로세스를 계속할 수 있습니다. <b>getMoreResults</b> 메서드가 <span sdata="langKeyword" value="false"><span class="keyword">false</span></span>를 반환하면 더 이상 처리할 결과 집합이 없다는 뜻입니다.</p><p><b>execute</b> 메서드가 <span sdata="langKeyword" value="false"><span class="keyword">false</span></span>를 반환하면 실행한 문은 업데이트 횟수 값을 반환하며, 이 값은 <a href="e9570228-4500-44b6-b2f1-84ac050b5112.htm">getUpdateCount</a> 메서드를 호출하여 검색할 수 있습니다.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p>업데이트 횟수에 대한 자세한 내용은 <span sdata="link"><a href="64cf4877-5995-4bfc-8865-b7618a5c8d01.htm">업데이트 횟수가 있는 저장 프로시저 사용</a></span>을 참조하십시오.</p></div><p>다음 예제에서는 SQL Server 2005 AdventureWorks 샘플 데이터베이스에 대한 열린 연결을 함수에 전달하고, 실행 시 두 개의 결과 집합을 반환하는 SQL 문을 생성합니다.</p><div name="snippetGroup"><div class="sampleCode"><span codeLanguage="Java"><pre>public static void executeStatement(Connection con) {
+   try {
+      String SQL = "SELECT TOP 10 * FROM Person.Contact; " +
+                   "SELECT TOP 20 * FROM Person.Contact";
+      Statement stmt = con.createStatement();
+      boolean results = stmt.execute(SQL);
+      int rsCount = 0;
+
+      //Loop through the available result sets.
+     do {
+        if(results) {
+           ResultSet rs = stmt.getResultSet();
+           rsCount++;
+
+           //Show data from the result set.
+           System.out.println("RESULT SET #" + rsCount);
+           while (rs.next()) {
+              System.out.println(rs.getString("LastName") + ", " + rs.getString("FirstName"));
+           }
+           rs.close();
+        }
+        System.out.println();
+        results = stmt.getMoreResults();
+        } while(results);
+      stmt.close();
+      }
+   catch (Exception e) {
+      e.printStackTrace();
+   }
+}
+
+</pre></span></div></div><p>이 경우 반환된 결과 집합 수는 두 개로 알려져 있습니다. 하지만 저장 프로시저를 호출할 때와 같이 반환되는 결과 집합의 개수를 알 수 없는 경우 결과 집합을 모두 처리하도록 코드를 작성합니다. 업데이트 값과 함께 다중 결과 집합을 반환하는 저장 프로시저 호출 예를 보려면 <span sdata="link"><a href="6b807a45-a8b5-4b1c-8b7b-d8175c710ce0.htm">복잡한 문 처리</a></span>을 참조하십시오.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p><b>SQLServerStatement</b> 클래스의 <b>getMoreResults</b> 메서드를 호출하면 이전에 반환한 결과 집합은 암시적으로 닫힙니다.</p></div></div><span id="seeAlsoSpan"><h1 class="heading">참고 항목</h1></span><div id="seeAlsoSection" class="section" name="collapseableSection" style=""><div class="seeAlsoStyle"><span sdata="link"><a href="7f8f3e8f-841e-4449-9154-b5366870121f.htm">JDBC 드라이버에서 문 사용</a></span></div></div></div><div id="footer" class="section"><span id="feedbackarea">이 항목에 대한 <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','8.0.12060.10000','%0\d의견을%20보내주셔서%20감사합니다.%20개발자%20작성%20팀에서는%20설명서를%20보완하는%20데%20보내주신%20의견을%20적극%20활용하고%20있습니다.%20보내주신%20의견을%20검토하는%20동안%20명확한%20설명이%20필요하거나%20해결책에%20대한%20추가%20의견을%20묻는%20전자%20메일을%20받을%20수%20있습니다.%20귀하의%20전자%20메일은%20기타%20다른%20용도로%20사용되지%20않고%20검토가%20끝난%20후%20바로%20폐기됩니다.%0\AMicrosoft의%20개인%20정보%20취급%20방침에%20대한%20자세한%20내용은%20http://privacy.microsoft.com/ko-kr/default.aspx를%20참조하십시오.%0\A%0\d','고객%20의견');">사용자 의견</a>을 Microsoft로 보내 주십시오.</span><span id="copyrightarea"><p><a href="9bad553b-9e70-4696-8499-2e35f772a1e0.htm">© 2012 Microsoft. All rights reserved.</a></p></span></div></div></body></html>

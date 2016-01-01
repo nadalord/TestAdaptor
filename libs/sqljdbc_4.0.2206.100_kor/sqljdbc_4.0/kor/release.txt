@@ -1,0 +1,129 @@
+﻿릴리스 정보
+SQL Server용 Microsoft JDBC Driver 4.0
+2012년 3월
+
+
+소개
+------------
+이 파일에는 SQL Server용 Microsoft JDBC Driver 4.0 설명서를
+보완하는 최신 정보 및 기타 중요 정보가 들어 있습니다. JDBC
+드라이버를 설치하기 전에 이 파일을 읽어야 합니다.
+
+본사에서는 사용자의 의견을 매우 소중하게 여기며 이러한 의견을
+반영하기 위해 노력하고 있습니다. JDBC 드라이버 블로그 및 온라인
+포럼을 사용하여 의견을 제출하는 방법은 http://msdn.
+microsoft.com/data/jdbc의 SQL Server용 Microsoft JDBC Driver
+4.0 페이지를 참조하십시오.
+
+
+설치
+------------
+install.txt에서 JDBC 드라이버 설치 방법을 볼 수 있습니다.
+Windows 및 Unix 운영 체제에서 JDBC 드라이버를 설치하는 방법은
+이 파일을 참조하십시오.
+
+지원되는 운영 체제
+---------------------------
+SQL Server용 Microsoft JDBC Driver 4.0은 다음과 같은 운영 체제를 지원합니다. 
+Linux, Unix, Windows Server 2008,
+Windows Vista 서비스 팩 1, Windows Server 2008 R2 및 Windows 7
+
+위 목록은 지원되는 운영 체제 중 일부입니다.
+JDBC 드라이버는 JVM(Java Virtual Machine)의 사용을 지원하는 모든 운영 체제에서
+작동하도록 설계되어 있지만  Sun Solaris, SUSE Linux 및 Windows Vista 서비스
+팩 1 이상 운영 체제에서만 테스트가 완료되었습니다.
+
+릴리스 내용
+----------------
+SQL Server용 Microsoft JDBC Driver 4.0 실행 파일인 zip 또는 tar 파일은
+지정된 위치에 다음 파일의 압축을 풉니다. 여기에서 지정된
+위치는 선택된 설치 위치에 대한 상대적인 위치입니다.
+
+<installation directory>\sqljdbc_<version>\<language>\install.txt
+<installation directory>\sqljdbc_<version>\<language>\release.txt
+<installation directory>\sqljdbc_<version>\<language>\license.txt
+<installation directory>\sqljdbc_<version>\<language>\sqljdbc.jar
+<installation directory>\sqljdbc_<version>\<language>\sqljdbc4.jar
+<installation directory>\sqljdbc_<version>\<language>\auth\x86\sqljdbc_auth.dll
+<installation directory>\sqljdbc_<version>\<language>\auth\x64\sqljdbc_auth.dll
+<installation directory>\sqljdbc_<version>\<language>\help\default.htm
+<installation directory>\sqljdbc_<version>\<language>\help\index.htm
+<installation directory>\sqljdbc_<version>\<language>\help\toc.htm
+<installation directory>\sqljdbc_<version>\<language>\help\html\<doc pages...>
+<installation directory>\sqljdbc_<version>\<language>\help\local\<doc files...>
+<installation directory>\sqljdbc_<version>\<language>\help\samples\<sample files...>
+<installation directory>\sqljdbc_<version>\<language>\xa\xa_install.sql
+<installation directory>\sqljdbc_<version>\<language>\xa\x86\sqljdbc_xa.dll
+<installation directory>\sqljdbc_<version>\<language>\xa\x64\sqljdbc_xa.dll
+
+
+변경 목록
+-----------
+3.0에서 4.0으로 변경된 내용
+
+1765616 이제 DatabaseMetadata.getTypeInfo에서 katmai 이상 버전에 대해 date, time, datetime2, datetimeoffset의 새로운 java.sql.Type 값을 반환합니다.
+
+1764334 JDBC XA Timeout 및 XID 추적에 대한 지원을 추가했습니다.
+
+1750318 이제 풀링된 연결을 재사용하면 SQLServerDatabaseMetaData 기능이 제대로 작동합니다.
+
+1768845 setTimestamp 및 updateTimestamp의 동작은 반올림에 대해 일관성을 유지합니다. 데이터는 서버로 보내지기 전에 
+        먼저 드라이버에서 소수점 일곱 자리로 반올림됩니다.
+
+1770134 최대값이 (23:59:59.999)인 시간 백 엔드 유형의 updateTime에서 이제 올바른 반올림 동작을 수행합니다.
+
+1761042 이제 DataSource Boolean 속성에서 종료 호출을 기록합니다.
+
+1750330 처음 실행 시 잘못된 오류를 방지하도록 XA SQL 스크립트가 업데이트되었습니다.
+
+1761393 unwrap 메서드의 추적이 향상되었습니다.
+
+1945579 이제 SQL Azure 및 SQL Server에서 모든 데이터 정렬에 대해 DatabaseMetaData.getSchemas가 제대로 작동합니다.
+
+1963089 hostNameInCertificate 연결 속성은 SQL Azure에 대한 SSL 인증서의 유효성을 확인하기 위한 필수 항목이 아닙니다.
+
+1958531 로그인하는 동안 데이터베이스 미러링 설정이 아닌 서버에 대한 연결에 실패하면(예: 데이터베이스가 존재하지 않음) 드라이버가 자동으로 재시도하지 않습니다.
+
+1954701 이제 중복 행 삽입 시 발생하는 예외에 SQLState 23000이 포함됩니다.
+
+2055259 sqljdbc_auth.dll을 로드한 후 통합 인증에 실패할 때 오류 메시지가 향상됩니다.
+
+2083373 이제 SQL Azure에 대해 잘못된 인수가 포함된 매개 변수가 있는 큰 쿼리에서 연결이 닫히지 않고 예외가 발생합니다.
+
+2084385 이제 JRE 1.7에서 getDate, getTimestamp, getDateTimeOffset은 모든 날짜에 대해 올바른 값을 반환합니다.
+
+2105115 이제 DatabaseMetaData.getColumns에서 가져온 ResultSet의 getObject가 제대로 작동합니다.
+
+
+알려진 문제점
+------------
+다음은 SQL Server용 Microsoft JDBC Driver 4.0 에 대한 알려진 문제점입니다.
+
+1) SQL MERGE 문과 관련된 매개 변수 메타데이터 제한 사항
+
+매개 변수가 있는 MERGE 쿼리와 함께 사용될 경우 PreparedStatement.getParameter
+Metadata()에서 SQLException이 발생합니다.
+
+
+2) JavaKerberos 및 IBM VM
+
+Windows 환경에서 실행할 경우 Java Kerberos가 작동할 수 있도록 구성 파일에 principalname을 지정해야 할 수 있습니다. 예를 들면 다음과 같습니다. 
+SQLJDBCDriver {
+com.ibm.security.auth.module.Krb5LoginModule required  useDefaultCcache=true credsType=initiator principal=principalname@principaldomain;
+};
+
+
+3) SQL AZURE 연결 삭제
+
+SQL Azure에 연결할 때 비활성 기간 후 방화벽과 같은 네트워크 구성 요소에서 유휴 연결을 종료할 수 있습니다.
+네트워크 구성 요소에서 유휴 연결을 삭제하지 않도록 하려면 드라이버가 로드된
+운영 체제에서 다음 레지스트리 설정(또는 Windows가 아닌 경우 이에 해당하는 설정)을 설정해야 합니다.
+           
+           레지스트리 설정                                                                     권장 값
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime                 30000      
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveInterval             1000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmission      10
+  
+
+
+

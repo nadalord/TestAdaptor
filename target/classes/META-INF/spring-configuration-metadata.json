@@ -1,0 +1,107 @@
+{
+  "groups": [
+    {
+      "name": "datasource.agent",
+      "type": "com.untis.bems.configure.database.AgentDatabaseProperties",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.master",
+      "type": "com.untis.bems.configure.database.MasterDatabaseProperties",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "datasource.agent.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.initial-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.max-active",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.max-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.max-wait",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.password",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.url",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.agent.user-name",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.AgentDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.initial-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.max-active",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.max-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.max-wait",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.password",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.url",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    },
+    {
+      "name": "datasource.master.user-name",
+      "type": "java.lang.String",
+      "sourceType": "com.untis.bems.configure.database.MasterDatabaseProperties"
+    }
+  ],
+  "hints": []
+}

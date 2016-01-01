@@ -1,0 +1,25 @@
+﻿<html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" /><META NAME="save" CONTENT="history" /><title>저장점 사용</title><meta name="Language" content="ko-kr" /><meta name="System.Keywords" content="트랜잭션 저장점" /><meta name="Microsoft.Help.Id" content="3b48eb13-32ef-4fb3-8e95-dbc9468c9a44" /><meta name="Description" content="저장점은 트랜잭션의 일부를 롤백하는 메커니즘을 제공합니다. SQL Server에서는 SAVE TRANSACTION savepoint_name 문을 사용하여 저장점을 만듭니다. 나중에 트랜잭션의 시작 지점으로 롤백하는 대신 저장점으로 롤백하려면 ROLLBACK TRANSACTION savepoint_name 문을 실행합니다." /><meta name="Microsoft.Help.ContentType" content="Concepts" /><link rel="stylesheet" type="text/css" href="../local/Classic.css" /><script type="text/javascript" src="../scripts/EventUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/SplitScreen.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/Dropdown.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_manifold.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_feedBack.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CheckboxMenu.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CommonUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../local/script_main.js">&amp;nbsp;</script></head><body><div id="header"><table id="bottomTable" cellpadding="0" cellspacing="0"><tr><td align="left"><span id="headerBold">저장점 사용</span></td></tr></table><table id="gradientTable"><tr><td class="nsrBottom" background="../icons/gradient.gif" /></tr></table></div><div id="mainSection"><div id="mainBody"><div class="introduction"><p>저장점은 트랜잭션의 일부를 롤백하는 메커니즘을 제공합니다. SQL Server에서는 SAVE TRANSACTION savepoint_name 문을 사용하여 저장점을 만듭니다. 나중에 트랜잭션의 시작 지점으로 롤백하는 대신 저장점으로 롤백하려면 ROLLBACK TRANSACTION savepoint_name 문을 실행합니다.</p><p>저장점은 오류가 발생할 가능성이 거의 없는 경우에 유용합니다. 오류가 자주 발생하지 않는 경우 업데이트 전에 각 트랜잭션을 테스트하여 업데이트가 유효한지 확인하는 것보다 저장점을 사용하여 트랜잭션의 일부를 롤백하는 것이 더 효율적입니다. 업데이트와 롤백은 비용이 많이 드는 작업이므로 저장점은 오류가 발생할 가능성이 적고 업데이트 전에 미리 유효성을 검사하는 데 비교적 비용이 많이 드는 경우에만 효과적입니다.</p><p>SQL Server용 Microsoft JDBC Driver는 <a href="937292a6-1525-423e-a2b2-a18fd34c2893.htm">SQLServerConnection</a> 클래스의 <a href="c39c6b4f-b9e2-423b-94ae-9f82d9e6d08d.htm">setSavepoint</a> 메서드를 통해 저장점을 사용할 수 있도록 지원합니다. <b>setSavepoint</b> 메서드를 사용하면 현재 트랜잭션 내에 명명되거나 명명되지 않은 저장점을 만들 수 있으며, 그러면 이 메서드가 <a href="1ae7db7b-959f-4142-8d9f-aa427869c6ac.htm">SQLServerSavepoint</a> 개체를 반환합니다. 또한 한 트랜잭션에 여러 개의 저장점을 만들 수 있습니다. 트랜잭션을 지정한 저장점으로 롤백하려면 <b>SQLServerSavepoint</b> 개체를 <a href="d5dbd9ef-194f-4130-bfcc-7901a4fa8ded.htm">rollback (java.sql.Savepoint)</a> 메서드로 전달합니다.</p><p>다음 예제에서는 <span class="code">try</span> 블록에서 두 개의 개별 문으로 구성된 로컬 트랜잭션을 수행하는 과정에 저장점을 사용합니다. 이들 문은 SQL Server 2005 AdventureWorks 샘플 데이터베이스에 있는 Production.ScrapReason 테이블에 대해 실행되며 저장점은 두 번째 문을 롤백하는 데 사용됩니다. 이렇게 하면 첫 번째 문만 데이터베이스에 커밋됩니다.</p><div name="snippetGroup"><div class="sampleCode"><span codeLanguage="Java"><pre>public static void executeTransaction(Connection con) {
+   try {
+      con.setAutoCommit(false);
+      Statement stmt = con.createStatement();
+      stmt.executeUpdate("INSERT INTO Production.ScrapReason(Name) VALUES('Correct width')");
+      Savepoint save = con.setSavepoint();
+      stmt.executeUpdate("INSERT INTO Production.ScrapReason(Name) VALUES('Wrong width')");
+      con.rollback(save);
+      con.commit();
+      stmt.close();
+      System.out.println("Transaction succeeded.");
+   }
+   catch (SQLException ex) {
+      ex.printStackTrace();
+      try {
+         System.out.println("Transaction failed.");
+         con.rollback();
+      }
+      catch (SQLException se) {
+         se.printStackTrace();
+      }
+   }
+}
+
+</pre></span></div></div></div><span id="seeAlsoSpan"><h1 class="heading">참고 항목</h1></span><div id="seeAlsoSection" class="section" name="collapseableSection" style=""><div class="seeAlsoStyle"><span sdata="link"><a href="afbb776f-05dc-4e79-bb25-2c340483e401.htm">JDBC 드라이버로 트랜잭션 수행</a></span></div></div></div><div id="footer" class="section"><span id="feedbackarea">이 항목에 대한 <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','8.0.12060.10000','%0\d의견을%20보내주셔서%20감사합니다.%20개발자%20작성%20팀에서는%20설명서를%20보완하는%20데%20보내주신%20의견을%20적극%20활용하고%20있습니다.%20보내주신%20의견을%20검토하는%20동안%20명확한%20설명이%20필요하거나%20해결책에%20대한%20추가%20의견을%20묻는%20전자%20메일을%20받을%20수%20있습니다.%20귀하의%20전자%20메일은%20기타%20다른%20용도로%20사용되지%20않고%20검토가%20끝난%20후%20바로%20폐기됩니다.%0\AMicrosoft의%20개인%20정보%20취급%20방침에%20대한%20자세한%20내용은%20http://privacy.microsoft.com/ko-kr/default.aspx를%20참조하십시오.%0\A%0\d','고객%20의견');">사용자 의견</a>을 Microsoft로 보내 주십시오.</span><span id="copyrightarea"><p><a href="9bad553b-9e70-4696-8499-2e35f772a1e0.htm">© 2012 Microsoft. All rights reserved.</a></p></span></div></div></body></html>

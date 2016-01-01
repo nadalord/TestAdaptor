@@ -1,0 +1,11 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.untis.bems.mapper.adaptor.CurrentPointMapper">
+
+	<select id="getAll" resultType="CurrentPoint">
+		SELECT
+			PT_NUM AS pointId,
+			PT_VALUE AS pointValue
+		FROM dbo.TB_CURRENT_VALUE
+	</select>
+	
+</mapper>

@@ -1,0 +1,50 @@
+﻿설치 방법
+SQL Server용 Microsoft JDBC Driver 4.0
+
+
+소개
+------------
+sqljdbc_<version>_enu.exe와 sqljdbc_<version>_enu.tar.gz의 
+압축을 푸는 방법입니다.
+
+
+WINDOWS
+-------
+1. license.txt 파일을 읽습니다. SQL Server용 Microsoft JDBC Driver 4.0을 다운로드하여 사용하면
+   이 사용권 계약의 내용에 동의한 것으로 간주됩니다.
+
+2. sqljdbc_<version>_enu.exe를 임시 디렉터리에 다운로드합니다.
+
+3. sqljdbc_<version>_enu.exe를 실행합니다.
+
+4. 메시지가 나타나면 설치 디렉터리를 입력합니다. 기본 디렉터리의
+   %ProgramFiles%에 이 zip 파일의 압축을 푸는 것이 좋습니다.
+
+	SQL Server용 Microsoft JDBC DRIVER 4.0
+
+5. 패키지 압축을 푼 후 %InstallationDirectory%\Microsoft JDBC Driver 4.0
+   for SQL Server\sqljdbc_<version>\<language>\help\default.htm을 열어서 JDBC 도움말 시스템을
+   엽니다. 그러면 웹 브라우저에 도움말 시스템이 표시됩니다.
+
+
+UNIX
+----
+1. license.txt 파일을 읽습니다. SQL Server용 Microsoft JDBC Driver 4.0을 다운로드하여 사용하면
+   이 사용권 계약의 내용에 동의한 것으로 간주됩니다.
+
+2. sqljdbc_<version>_enu.tar.gz를 임시 디렉터리에 다운로드합니다.
+
+3. 압축된 tar의 압축을 풀려면 드라이버 압축을 풀 디렉터리로 이동한 후
+   다음을 입력합니다.
+
+	gzip -d sqljdbc_<version>_enu.tar.gz
+
+4. tar의 압축을 풀려면 드라이버를 설치할 디렉터리로 이동한 후 다음을
+   입력합니다.
+
+	tar -xf sqljdbc_<version>_enu.tar
+
+5. 패키지 압축을 푼 후 %InstallationDirectory%/Microsoft JDBC Driver 4.0
+   for SQL Server/sqljdbc_<version>/<language>/help/default.htm을 열어서 JDBC 도움말 시스템을
+   엽니다. 그러면 기본 웹 브라우저에 도움말 시스템이 
+   표시됩니다.

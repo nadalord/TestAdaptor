@@ -1,0 +1,42 @@
+﻿<html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" /><META NAME="save" CONTENT="history" /><title>연결 URL 샘플</title><meta name="Language" content="ko-kr" /><meta name="System.Keywords" content="연결 URL 샘플" /><meta name="Microsoft.Help.Id" content="96fabc42-59d1-4cc0-93c5-db00cbe55e95" /><meta name="Description" content="이 SQL Server용 Microsoft JDBC Driver 샘플 응용 프로그램에서는 연결 URL을 사용하여 SQL Server 데이터베이스에 연결하는 방법을 보여 줍니다. 또한 SQL 문을 사용하여 SQL Server 데이터베이스에서 데이터를 검색하는 방법도 보여 줍니다." /><meta name="Microsoft.Help.ContentType" content="Samples" /><link rel="stylesheet" type="text/css" href="../local/Classic.css" /><script type="text/javascript" src="../scripts/EventUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/SplitScreen.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/Dropdown.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_manifold.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_feedBack.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CheckboxMenu.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CommonUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../local/script_main.js">&amp;nbsp;</script></head><body><div id="header"><table id="bottomTable" cellpadding="0" cellspacing="0"><tr><td align="left"><span id="headerBold">연결 URL 샘플</span></td></tr></table><table id="gradientTable"><tr><td class="nsrBottom" background="../icons/gradient.gif" /></tr></table></div><div id="mainSection"><div id="mainBody"><div class="introduction"><p>이 SQL Server용 Microsoft JDBC Driver 샘플 응용 프로그램에서는 연결 URL을 사용하여 SQL Server 데이터베이스에 연결하는 방법을 보여 줍니다. 또한 SQL 문을 사용하여 SQL Server 데이터베이스에서 데이터를 검색하는 방법도 보여 줍니다.</p><p>이 샘플의 코드 파일 이름은 connectURL.java이며 다음과 같은 위치에 있습니다.</p><p>&lt;<i>installation directory</i>&gt;\sqljdbc_&lt;<i>version</i>&gt;\&lt;<i>language</i>&gt;\help\samples\connections</p></div><h1 class="heading">요구 사항</h1><div id="requirementsTitleSection" class="section" name="collapseableSection" style=""><p>이 샘플 응용 프로그램을 실행하려면 sqljdbc.jar 파일 또는 sqljdbc4.jar 파일을 포함하도록 클래스 경로를 설정해야 합니다. 클래스 경로에 sqljdbc.jar 또는 sqljdbc4.jar에 대한 항목이 없으면 샘플 응용 프로그램에서 일반적인 "클래스를 찾을 수 없습니다." 예외가 발생합니다. 또한 SQL Server 2005 AdventureWorks 샘플 데이터베이스에 대한 액세스 권한이 필요합니다. 클래스 경로를 설정하는 방법은 <span sdata="link"><a href="6faaf05b-8b70-4ed2-9b44-eee5897f1cd0.htm">JDBC 드라이버 사용</a></span>을 참조하십시오.</p><div style="margin: .5em 1.5em .5em 1.5em"><b></b><p>SQL Server용 Microsoft JDBC Driver는 기본 설정된 JRE(Java Runtime Environment)에 따라 사용할 수 있는 sqljdbc.jar 및 sqljdbc4.jar 클래스 라이브러리 파일을 제공합니다. JAR 파일 선택에 대한 자세한 내용은 <span sdata="link"><a href="447792bb-f39b-49b4-9fd0-1ef4154c74ab.htm">JDBC 드라이버 시스템 요구 사항</a></span>을 참조하십시오.</p></div></div><h1 class="heading">예</h1><div id="exampleSection" class="section" name="collapseableSection" style=""><p>다음 예제 코드에서는 연결 URL의 다양한 연결 속성을 설정한 후 <b>DriverManager</b> 클래스의 <b>getConnection</b> 메서드를 호출하여 <a href="937292a6-1525-423e-a2b2-a18fd34c2893.htm">SQLServerConnection</a> 개체를 반환합니다.</p><p>그런 다음 <b>SQLServerConnection</b> 개체의 <a href="6d043ba9-b8ec-41d3-bb22-ad2c4aebda6f.htm">createStatement</a> 메서드를 사용하여 <a href="ec24963c-8b51-4838-91e9-1fbfa2347451.htm">SQLServerStatement</a> 개체를 만든 후 <a href="599cf463-e19f-4baa-bacb-513cad7c6cd8.htm">executeQuery</a> 메서드를 호출하여 SQL 문을 실행합니다.</p><p>마지막으로 <b>executeQuery</b> 메서드에서 반환된 <a href="eaffcff1-286c-459f-83da-3150778480c9.htm">SQLServerResultSet</a> 개체를 사용하여 SQL 문이 반환한 결과를 반복합니다.</p><div class="sampleCode"><span codeLanguage="other"><pre>import java.sql.*;
+
+public class connectURL {
+
+   public static void main(String[] args) {
+
+      // Create a variable for the connection string.
+      String connectionUrl = "jdbc:sqlserver://localhost:1433;" +
+         "databaseName=AdventureWorks;user=UserName;password=*****";
+
+      // Declare the JDBC objects.
+      Connection con = null;
+      Statement stmt = null;
+      ResultSet rs = null;
+
+      try {
+         // Establish the connection.
+         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+         con = DriverManager.getConnection(connectionUrl);
+
+         // Create and execute an SQL statement that returns some data.
+         String SQL = "SELECT TOP 10 * FROM Person.Contact";
+         stmt = con.createStatement();
+         rs = stmt.executeQuery(SQL);
+
+         // Iterate through the data in the result set and display it.
+         while (rs.next()) {
+            System.out.println(rs.getString(4) + " " + rs.getString(6));
+         }
+      }
+
+      // Handle any errors that may have occurred.
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally {
+         if (rs != null) try { rs.close(); } catch(Exception e) {}
+         if (stmt != null) try { stmt.close(); } catch(Exception e) {}
+         if (con != null) try { con.close(); } catch(Exception e) {}
+      }
+   }
+}</pre></span></div></div><span id="seeAlsoSpan"><h1 class="heading">참고 항목</h1></span><div id="seeAlsoSection" class="section" name="collapseableSection" style=""><div class="seeAlsoStyle"><span sdata="link"><a href="ce43cc20-46a3-42ff-a3fb-75ad1ed10e08.htm">데이터 연결 및 검색</a></span></div></div></div><div id="footer" class="section"><span id="feedbackarea">이 항목에 대한 <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','8.0.12060.10000','%0\d의견을%20보내주셔서%20감사합니다.%20개발자%20작성%20팀에서는%20설명서를%20보완하는%20데%20보내주신%20의견을%20적극%20활용하고%20있습니다.%20보내주신%20의견을%20검토하는%20동안%20명확한%20설명이%20필요하거나%20해결책에%20대한%20추가%20의견을%20묻는%20전자%20메일을%20받을%20수%20있습니다.%20귀하의%20전자%20메일은%20기타%20다른%20용도로%20사용되지%20않고%20검토가%20끝난%20후%20바로%20폐기됩니다.%0\AMicrosoft의%20개인%20정보%20취급%20방침에%20대한%20자세한%20내용은%20http://privacy.microsoft.com/ko-kr/default.aspx를%20참조하십시오.%0\A%0\d','고객%20의견');">사용자 의견</a>을 Microsoft로 보내 주십시오.</span><span id="copyrightarea"><p><a href="9bad553b-9e70-4696-8499-2e35f772a1e0.htm">© 2012 Microsoft. All rights reserved.</a></p></span></div></div></body></html>

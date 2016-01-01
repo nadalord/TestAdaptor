@@ -1,0 +1,52 @@
+﻿<html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:MSHelp="http://msdn.microsoft.com/mshelp" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" /><META NAME="save" CONTENT="history" /><title>unwrap 메서드(SQLServerCallableStatement)</title><meta name="Language" content="ko-kr" /><meta name="Microsoft.Help.Id" content="cbbf2728-b8c8-4c35-875a-6e967c8285dc" /><meta name="Description" content="SQL Server용 Microsoft JDBC Driver 관련 메서드에 액세스할 수 있도록 지정된 인터페이스를 구현하는 개체를 반환합니다." /><meta name="Microsoft.Help.ContentType" content="Reference" /><link rel="stylesheet" type="text/css" href="../local/Classic.css" /><script type="text/javascript" src="../scripts/EventUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/SplitScreen.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/Dropdown.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_manifold.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/script_feedBack.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CheckboxMenu.js">&amp;nbsp;</script><script type="text/javascript" src="../scripts/CommonUtilities.js">&amp;nbsp;</script><script type="text/javascript" src="../local/script_main.js">&amp;nbsp;</script></head><body><div id="header"><table id="bottomTable" cellpadding="0" cellspacing="0"><tr><td align="left"><span id="headerBold">unwrap 메서드(SQLServerCallableStatement)</span></td></tr></table><table id="gradientTable"><tr><td class="nsrBottom" background="../icons/gradient.gif" /></tr></table></div><div id="mainSection"><div id="mainBody"><div class="introduction"><p>SQL Server용 Microsoft JDBC Driver 관련 메서드에 액세스할 수 있도록 지정된 인터페이스를 구현하는 개체를 반환합니다.</p></div><h1 class="heading">구문</h1><div id="syntaxSection" class="section"><div class="sampleCode"><span codeLanguage="other"><pre>
+public &lt;T&gt; T <b>unwrap</b>(Class&lt;T&gt; <span class="parameter" sdata="paramReference">iface</span>)</pre></span></div></div><h1 class="heading">매개 변수</h1><div id="parametersSection" class="section" name="collapseableSection" style=""><p><span class="parameter" sdata="paramReference">iface</span></p><p>인터페이스를 정의하는 <b>T</b> 형식의 클래스입니다.</p></div><h1 class="heading">반환 값</h1><div id="returnValueSection" class="section" name="collapseableSection" style=""><p>지정된 인터페이스를 구현하는 개체입니다. </p></div><h1 class="heading">예외</h1><div id="ddueExceptionsSection" class="section" name="collapseableSection" style=""><p><a href="af5ef257-7cf6-4db3-b1ee-07d22d82bef1.htm">SQLServerException</a></p></div><h1 class="heading">주의</h1><div id="languageReferenceRemarksSection" class="section" name="collapseableSection" style=""><p><a href="cbbf2728-b8c8-4c35-875a-6e967c8285dc.htm">unwrap</a> 메서드는 JDBC 4.0 사양에서 도입된 java.sql.Wrapper 인터페이스에 의해 정의됩니다.</p><p>응용 프로그램에서는 SQL Server용 Microsoft JDBC Driver와 관련된 JDBC API에 대한 확장에 액세스해야 할 수 있습니다. <b>unwrap</b> 메서드는 이 개체가 확장하는 공용 클래스에서 공급업체 확장을 노출하는 경우 이 클래스에 대한 래핑 해제를 지원합니다. </p><p><a href="30710a63-c05d-47d9-9cf9-c087a1c76373.htm">SQLServerCallableStatement</a>는 <a href="ec24963c-8b51-4838-91e9-1fbfa2347451.htm">ISQLServerStatement</a>에서 확장된 <a href="a8481c06-fbba-432b-8c69-4f4619c20ad4.htm">ISQLServerPreparedStatement</a>를 구현합니다. 이 메서드가 호출되면 개체가 <a href="ec24963c-8b51-4838-91e9-1fbfa2347451.htm">SQLServerStatement</a>, <a href="a8481c06-fbba-432b-8c69-4f4619c20ad4.htm">SQLServerPreparedStatement</a> 및 <a href="30710a63-c05d-47d9-9cf9-c087a1c76373.htm">SQLServerCallableStatement</a> 클래스로 래핑 해제됩니다.</p><p>자세한 내용은 <span sdata="link"><a href="27fc9b72-9f21-4728-abcb-5c015f28a6ab.htm">래퍼 및 인터페이스</a></span>를 참조하십시오.</p><p>다음 코드 예제에서는 <b>isWrapperFor</b> 및 <b>unwrap</b> 메서드를 사용하여 드라이버 확장을 검사하고 <a href="9f489835-6cda-4c8c-b139-079639a169cf.htm">setResponseBuffering</a>, <a href="a9a9ffdd-7ce3-4e0a-907c-34d6a54e6865.htm">getResponseBuffering</a> 등의 공급업체별 메서드를 호출하는 방법을 보여 줍니다.</p><div class="sampleCode"><span codeLanguage="other"><pre>public static void executeStoredProcedure(Connection con) {
+   try {
+    CallableStatement cstmt = 
+       con.prepareCall("{call dbo.stored_proc_name(?, ?)}");
+    
+    // The recommended way to access the JDBC 
+    // Driver-specific methods is to use the JDBC 4.0 Wrapper 
+    // functionality. 
+    // The following code statements demonstrates how to use the 
+    // isWrapperFor and unwrap methods
+    // to access the driver-specific response buffering methods.
+
+    if (cstmt.isWrapperFor(
+      com.microsoft.sqlserver.jdbc.SQLServerCallableStatement.class)) {
+     // The CallableStatement object can unwrap to 
+     // SQLServerCallableStatement.
+     SQLServerCallableStatement SQLcstmt = 
+     cstmt.unwrap(
+        com.microsoft.sqlserver.jdbc.SQLServerCallableStatement.class);
+     SQLcstmt.setResponseBuffering("adaptive");
+     System.out.println("Response buffering mode has been set to " +
+         SQLcstmt.getResponseBuffering());
+     }
+     
+    if (cstmt.isWrapperFor(
+      com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.class)) {
+      // The CallableStatement object can unwrap to 
+      // SQLServerPreparedStatement.                  
+      SQLServerPreparedStatement SQLpstmt = 
+       cstmt.unwrap(
+       com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.class);
+      SQLpstmt.setResponseBuffering("adaptive");
+      System.out.println("Response buffering mode has been set to " +
+          SQLpstmt.getResponseBuffering());
+    }
+    if (cstmt.isWrapperFor(
+      com.microsoft.sqlserver.jdbc.SQLServerStatement.class)) {
+
+      // The CallableStatement object can unwrap to SQLServerStatement. 
+      SQLServerStatement SQLstmt = 
+        cstmt.unwrap(
+        com.microsoft.sqlserver.jdbc.SQLServerStatement.class);
+      SQLstmt.setResponseBuffering("adaptive");
+      System.out.println("Response buffering mode has been set to " +
+      SQLstmt.getResponseBuffering());
+    }
+  }
+  catch (Exception e) {
+     e.printStackTrace();
+  }
+} </pre></span></div></div><span id="seeAlsoSpan"><h1 class="heading">참고 항목</h1></span><div id="seeAlsoSection" class="section" name="collapseableSection" style=""><div class="seeAlsoStyle"><span sdata="link"><a href="71156863-3588-453e-b5a5-0573b2c1bebf.htm">isWrapperFor 메서드(SQLServerCallableStatement)</a></span></div><div class="seeAlsoStyle"><span sdata="link"><a href="30710a63-c05d-47d9-9cf9-c087a1c76373.htm">SQLServerCallableStatement 클래스</a></span></div><div class="seeAlsoStyle"><span sdata="link"><a href="5ebdc186-e50f-4d14-bbf4-95af5051e4a4.htm">SQLServerCallableStatement 멤버</a></span></div></div></div><div id="footer" class="section"><span id="feedbackarea">이 항목에 대한 <a href="javascript:SubmitFeedback('DevDocs@Microsoft.com','','','','8.0.12060.10000','%0\d의견을%20보내주셔서%20감사합니다.%20개발자%20작성%20팀에서는%20설명서를%20보완하는%20데%20보내주신%20의견을%20적극%20활용하고%20있습니다.%20보내주신%20의견을%20검토하는%20동안%20명확한%20설명이%20필요하거나%20해결책에%20대한%20추가%20의견을%20묻는%20전자%20메일을%20받을%20수%20있습니다.%20귀하의%20전자%20메일은%20기타%20다른%20용도로%20사용되지%20않고%20검토가%20끝난%20후%20바로%20폐기됩니다.%0\AMicrosoft의%20개인%20정보%20취급%20방침에%20대한%20자세한%20내용은%20http://privacy.microsoft.com/ko-kr/default.aspx를%20참조하십시오.%0\A%0\d','고객%20의견');">사용자 의견</a>을 Microsoft로 보내 주십시오.</span><span id="copyrightarea"><p><a href="9bad553b-9e70-4696-8499-2e35f772a1e0.htm">© 2012 Microsoft. All rights reserved.</a></p></span></div></div></body></html>

@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: com.untis.Test
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in com.untis.Test
+test(com.untis.Test)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Not yet implemented
+	at org.junit.Assert.fail(Assert.java:88)
+	at com.untis.Test.test(Test.java:9)
+
