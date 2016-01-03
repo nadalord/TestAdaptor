@@ -11,22 +11,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.BemsAdaptorApplication;
-import com.untis.bems.domain.PointInfo;
-import com.untis.bems.mapper.adaptor.CurrentPointMapper;
-import com.untis.bems.service.bems.PointService;
+import com.untis.bems.domain.BemsPoint;
+import com.untis.bems.mapper.adaptor.DevicePointMapper;
+import com.untis.bems.service.bems.BemsPointService;
 
-public class PointMapperTest extends AbstractTestableContext {
+public class BemsPointMapperTest extends AbstractTestableContext {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BemsAdaptorApplication.class);
 	
 	@Autowired
-	PointService pointService;	
+	BemsPointService pointService;	
 
 	@Test
 	public void getList() {
-		List<PointInfo> points = pointService.getList(1, 1);
+		List<BemsPoint> points = pointService.getList(1, 1);
 		
-		for (PointInfo point : points) {
+		for (BemsPoint point : points) {
 			logger.info("point_id : {}", point.getPointId());
 		}
 	}

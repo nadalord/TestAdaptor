@@ -11,19 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.BemsAdaptorApplication;
-import com.untis.bems.domain.CurrentPoint;
-import com.untis.bems.domain.PointInfo;
+import com.untis.bems.domain.DevicePoint;
+import com.untis.bems.domain.BemsPoint;
 
-public class CurrentPointMapperTest extends AbstractTestableContext {
+public class DevicePointMapperTest extends AbstractTestableContext {
 		
 	private static final Logger logger = LoggerFactory.getLogger(BemsAdaptorApplication.class);
 	
 	@Autowired
-	CurrentPointMapper currentPointMapper;
+	DevicePointMapper devicePointMapper;
 
 	@Test
 	public void selectList() {
-		List<CurrentPoint> points = currentPointMapper.getAll();	
+		List<DevicePoint> points = devicePointMapper.getAll();	
 		
 		System.out.println("TEST");
 

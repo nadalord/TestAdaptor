@@ -1,6 +1,6 @@
 package com.untis.bems.domain;
 
-public class PointInfo {	
+public class BemsPoint {	
 	String pointId;
 	String objectId;
 	String primitiveType;

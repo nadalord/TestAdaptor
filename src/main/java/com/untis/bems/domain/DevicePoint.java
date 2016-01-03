@@ -1,6 +1,6 @@
 package com.untis.bems.domain;
 
-public class CurrentPoint {		
+public class DevicePoint {		
 	String pointId;	
 	String pointValue;	
 	

@@ -2,7 +2,9 @@ package com.untis.bems.adaptor;
 
 import org.springframework.stereotype.Component;
 
-import com.untis.bems.mapper.bems.PointMapper;
+import com.untis.bems.service.bems.BemsPointService;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,12 +12,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Component
 public class DatabaseAdatorTask {
 	
+	@Resource
+	int agentMasterIdx;
+	
+	@Resource
+	int buildingMasterIdx;
+	
 	@Autowired
-	PointMapper pointMapper;	
+	BemsPointService pointService;
 	
 	@Scheduled(cron="*/5 * * * * *")
 	public void run() {
 		System.out.println("[Adaptor] running ");
-		pointMapper.getList(1, 1);
+		pointService.getList(buildingMasterIdx, agentMasterIdx);
 	}
 }
