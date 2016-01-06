@@ -3,9 +3,16 @@
 
 	<select id="getAll" resultType="DevicePoint">
 		SELECT
-			PT_NUM AS pointId,
-			PT_VALUE AS pointValue
-		FROM dbo.TB_CURRENT_VALUE
+			POINT_ID AS pointId,
+			1 AS pointValue
+		FROM POIT_LIST
 	</select>
+
+<!-- 	<select id="getAll" resultType="DevicePoint"> -->
+<!-- 		SELECT -->
+<!-- 			PT_NUM AS pointId, -->
+<!-- 			PT_VALUE AS pointValue -->
+<!-- 		FROM dbo.TB_CURRENT_VALUE -->
+<!-- 	</select> -->
 	
 </mapper>

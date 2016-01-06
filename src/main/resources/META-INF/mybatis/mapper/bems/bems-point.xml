@@ -2,7 +2,8 @@
 <mapper namespace="com.untis.bems.mapper.bems.BemsPointMapper">
 
 	<select id="getList" resultType="BemsPoint">
-		SELECT 	PL.POINT_ID AS pointId, 
+		SELECT 	PL.POIT_LIST_IX AS pointListIdx,
+				PL.POINT_ID AS pointId, 
 				PL.OBJECT_CD AS objectId, 
 				PL.PRIMITIVE_TYPE_CD AS primitiveType, 
 				PL.PRIORITY_CD AS priority,

@@ -1,6 +1,7 @@
 package com.untis.bems.domain;
 
-public class BemsPoint {	
+public class BemsPoint {
+	int pointListIdx;
 	String pointId;
 	String objectId;
 	String primitiveType;
@@ -8,6 +9,14 @@ public class BemsPoint {
 	String agentProtocol;
 	String privateIp;
 
+	public int getPointListIdx() {
+		return pointListIdx;
+	}
+
+	public void setPointListIdx(int pointListIdx) {
+		this.pointListIdx = pointListIdx;
+	}
+	
 	public String getPointId() {
 		return pointId;
 	}
@@ -16,7 +25,6 @@ public class BemsPoint {
 		this.pointId = pointId;
 	}
 	
-
 	public String getObjectId() {
 		return objectId;
 	}
