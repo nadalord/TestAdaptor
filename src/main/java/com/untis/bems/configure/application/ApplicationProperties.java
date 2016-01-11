@@ -7,9 +7,16 @@ public class ApplicationProperties {
 	
 	public static final String PREFIX = "bems.application"; 
 	
+	String ddcName;
 	int agentMasterIdx;
 	int buildingMasterIdx;
 	
+	public String getDdcName() {
+		return ddcName;
+	}
+	public void setDdcName(String ddcName) {
+		this.ddcName = ddcName;
+	}
 	public int getAgentMasterIdx() {
 		return agentMasterIdx;
 	}

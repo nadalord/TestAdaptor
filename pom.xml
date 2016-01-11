@@ -5,11 +5,11 @@
 
 	<groupId>com.untis</groupId>
 	<artifactId>bems</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>BemsAdaptor</name>
-	<description>Bems Adaptor</description>
+	<name>BemsMaster</name>
+	<description>Bems Master</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

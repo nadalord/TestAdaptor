@@ -26,6 +26,5 @@ public class DevicePointMapperTest extends AbstractTestableContext {
 		List<DevicePoint> points = devicePointMapper.getAll();	
 		
 		System.out.println("TEST");
-
 	}
 }

@@ -19,7 +19,7 @@ import com.untis.bems.service.bems.BemsPointService;
 
 public class BemsPointMapperTest extends AbstractTestableContext {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BemsAdaptorApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(BemsPointMapperTest.class);
 	
 	@Resource
 	int agentMasterIdx;
@@ -34,10 +34,12 @@ public class BemsPointMapperTest extends AbstractTestableContext {
 	public void getList() {
 		List<BemsPoint> points = pointService.getList(1, 1);
 		assertTrue("Point Count", points.size() > 0);
+		
+		logger.info("Test getList");
 	
-		for (BemsPoint point : points) {
-			logger.info("point_id : {}", point.getPointId());
-		}
+//		for (BemsPoint point : points) {
+//			logger.info("point_id : {}", point.getPointId());
+//		}
 	}
 
 }
