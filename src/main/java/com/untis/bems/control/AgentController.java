@@ -1,4 +1,4 @@
-package com.untis.bems.broker;
+package com.untis.bems.control;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
