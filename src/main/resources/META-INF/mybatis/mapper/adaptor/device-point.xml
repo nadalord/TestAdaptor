@@ -1,12 +1,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.untis.bems.mapper.adaptor.DevicePointMapper">
 
-	<select id="getAll" resultType="DevicePoint">
-		SELECT
-			POINT_ID AS pointId,
-			1 AS pointValue
-		FROM POIT_LIST
-	</select>
+<!-- 	<select id="getAll" resultType="DevicePoint"> -->
+<!-- 		SELECT -->
+<!-- 			POINT_ID AS pointId, -->
+<!-- 			1 AS pointValue -->
+<!-- 		FROM POIT_LIST -->
+<!-- 	</select> -->
 
 <!-- 	<select id="getAll" resultType="DevicePoint"> -->
 <!-- 		SELECT -->
@@ -14,5 +14,15 @@
 <!-- 			PT_VALUE AS pointValue -->
 <!-- 		FROM dbo.TB_CURRENT_VALUE -->
 <!-- 	</select> -->
+
+	<!-- 포인트 테이블을 통한 신영 DDC 테스트  -->
+	<select id="getAll" resultType="DevicePoint">
+		SELECT
+			PT_NUM AS pointId,
+			PT_NAME AS pointName,
+			1 AS pointValue
+		FROM dbo.TB_POINT
+		ORDER BY pointId ASC
+	</select>
 	
 </mapper>

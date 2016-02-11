@@ -54,6 +54,18 @@ public class ShinYoungBemsAdaptor implements BemsAdaptor {
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss"); 
 		String time = timeFormat.format(new Date()); 
 		
-		// TODO 서비스 코드 추
+		// TODO 서비스 코드 변경
+		for (BemsPoint point : bemsPoints) {
+			DevicePoint devicePoint = devicePoints.get(point.getPointId());
+			if (devicePoint != null) {
+				BemsHistory history = new BemsHistory();
+				
+				history.setDate(date);
+				history.setTime(time);
+				history.setPointListIdx(point.getPointListIdx());
+				history.setPointValue(Integer.toString(point.getPointListIdx()));
+				historyService.add(buildingMasterIdx, history);
+			}
+		}
 	}
 }
