@@ -18,5 +18,4 @@ public class BemsPointServiceImpl implements BemsPointService {
 	public List<BemsPoint> getList(int buidMasterIx, int angetMasterIx) {		
 		return pointMapper.getList(buidMasterIx, angetMasterIx);
 	}
-
 }

@@ -40,6 +40,15 @@ public class TestBemsAdaptor implements BemsAdaptor {
 	@Autowired
 	DevicePointService devicePointService;
 	
+	public int addBemsHistory(String date, String time, int pointListIdx, DevicePoint point) {
+		BemsHistory history = new BemsHistory();
+		history.setDate(date);
+		history.setTime(time);
+		history.setPointListIdx(pointListIdx);
+		history.setPointValue(point.getPointValue());		
+		return historyService.add(buildingMasterIdx, history);
+	}
+	
 	public void run ()
 	{
 		logger.info("TestDDC DDC Monitoring Started");

@@ -11,12 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Component
 public class DatabaseAdatorTask {
 	
-//	@Autowired
-//	@Qualifier("ShinYoungDDC")
-//	BemsAdaptor bemsAdaptor;
-	
 	@Autowired
-	@Qualifier("TestDDC")
+	@Qualifier("ShinYoungDDC")
 	BemsAdaptor bemsAdaptor;
 	
 	@Scheduled(cron="10 */15 * * * *")

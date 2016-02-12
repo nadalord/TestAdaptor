@@ -41,12 +41,18 @@ public class ShinYoungBemsAdaptor implements BemsAdaptor {
 	@Autowired
 	DevicePointService devicePointService;
 	
+	public int addBemsHistory(String date, String time, int pointListIdx, DevicePoint point) {
+		BemsHistory history = new BemsHistory();
+		history.setDate(date);
+		history.setTime(time);
+		history.setPointListIdx(pointListIdx);
+		history.setPointValue(point.getPointValue());		
+		return historyService.add(buildingMasterIdx, history);
+	}
+	
 	public void run ()
 	{
 		logger.info("ShinYoung DDC Monitoring Started");
-		
-		List<BemsPoint> bemsPoints = bemsPointService.getList(buildingMasterIdx, agentMasterIdx);
-		Map<String, DevicePoint> devicePoints = devicePointService.getAll();
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
 		String date = dateFormat.format(new Date()); 
@@ -54,17 +60,14 @@ public class ShinYoungBemsAdaptor implements BemsAdaptor {
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss"); 
 		String time = timeFormat.format(new Date()); 
 		
+		List<BemsPoint> bemsPoints = bemsPointService.getList(buildingMasterIdx, agentMasterIdx);
+		Map<String, DevicePoint> devicePoints = devicePointService.getAll();
+		
 		// TODO 서비스 코드 변경
 		for (BemsPoint point : bemsPoints) {
 			DevicePoint devicePoint = devicePoints.get(point.getPointId());
-			if (devicePoint != null) {
-				BemsHistory history = new BemsHistory();
-				
-				history.setDate(date);
-				history.setTime(time);
-				history.setPointListIdx(point.getPointListIdx());
-				history.setPointValue(Integer.toString(point.getPointListIdx()));
-				historyService.add(buildingMasterIdx, history);
+			if (devicePoint != null) {				
+				addBemsHistory(date, time, point.getPointListIdx(), devicePoint);
 			}
 		}
 	}
