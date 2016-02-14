@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.DevicePoint;
-import com.untis.bems.mapper.bems.BemsPointMapperTest;
+import com.untis.bems.mapper.adaptor.BemsPointMapperTest;
 
 public class DevicePointServiceTest extends AbstractTestableContext {
 

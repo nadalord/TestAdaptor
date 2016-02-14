@@ -1,4 +1,4 @@
-package com.untis.bems.service.bems;
+package com.untis.bems.service.adaptor;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.untis.bems.domain.BemsPoint;
-import com.untis.bems.mapper.bems.BemsPointMapper;
+import com.untis.bems.mapper.adaptor.BemsPointMapper;
 
 @Service
 public class BemsPointServiceImpl implements BemsPointService {

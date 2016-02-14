@@ -1,7 +1,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.untis.bems.mapper.bems.BemsPointMapper">
+<mapper namespace="com.untis.bems.mapper.adaptor.BemsPointMapper">
 
 	<select id="getList" resultType="BemsPoint">
+	<![CDATA[
 		SELECT 	PL.POIT_LIST_IX AS pointListIdx,
 				PL.POINT_ID AS pointId, 
 				PL.OBJECT_CD AS objectId, 
@@ -12,6 +13,7 @@
 		FROM POIT_LIST AS PL
 		JOIN AGNT_MASTER AS AM ON (AM.BUID_MASTER_IX = ${buidMasterIx} AND AM.AGNT_MASTER_IX = ${agentMasterIx})
 		JOIN AGNT_DDC AS AD ON (AD.AGNT_MASTER_IX = AM.AGNT_MASTER_IX AND AD.AGNT_DDC_IX = PL.AGNT_DDC_IX)
+	]]>
 	</select>
 	
 </mapper>

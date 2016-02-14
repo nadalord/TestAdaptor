@@ -1,0 +1,26 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.untis.bems.mapper.control.DeviceControlAlarmMapper">
+	<insert id="add">
+	<![CDATA[
+		INSERT INTO ALRM_HISTORY (                           
+		          ALRM_LIST_IX,    
+		          DATE,                                      
+		          TIME,                                          
+		          MEASURED_VALUE)                           
+		SELECT ALRM_LIST_IX,
+		       DATE_FORMAT(NOW(), '%Y%m%d'),
+		       DATE_FORMAT(NOW(), '%H%i%s'),
+		       #{value}                   
+		FROM ALRM_LIST                                    
+		WHERE POIT_LIST_IX=#{pointListIdx}
+	]]>
+	</insert>
+	
+	<update id="updateStatus">
+	<![CDATA[
+		UPDATE ALRM_LIST
+		SET ALARM_STATUS_CD=#{status}
+		WHERE POIT_LIST_IX=#{pointListIdx}
+	]]>
+	</update>
+</mapper>

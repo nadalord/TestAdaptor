@@ -1,4 +1,4 @@
-package com.untis.bems.service.bems;
+package com.untis.bems.service.adaptor;
 
 import com.untis.bems.domain.BemsHistory;
 

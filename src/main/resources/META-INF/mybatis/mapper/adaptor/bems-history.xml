@@ -1,6 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.untis.bems.mapper.bems.BemsHistoryMapper">
+<mapper namespace="com.untis.bems.mapper.adaptor.BemsHistoryMapper">
 	<insert id="add">
+	<![CDATA[
 		INSERT INTO POIT_MEASURED_HISTORY_#{buildingMasterIdx} (
 			MEASURED_DATE,
 			MEASURED_TIME, 
@@ -13,5 +14,6 @@
 			#{history.pointListIdx},
 			#{history.pointValue},
 			#{history.pointChangeValue})
+	]]>
 	</insert>
 </mapper>

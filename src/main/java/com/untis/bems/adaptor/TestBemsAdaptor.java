@@ -17,8 +17,8 @@ import com.untis.bems.domain.BemsHistory;
 import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
 import com.untis.bems.service.adaptor.DevicePointService;
-import com.untis.bems.service.bems.BemsHistoryService;
-import com.untis.bems.service.bems.BemsPointService;
+import com.untis.bems.service.adaptor.BemsHistoryService;
+import com.untis.bems.service.adaptor.BemsPointService;
 
 @Service("TestDDC")
 public class TestBemsAdaptor implements BemsAdaptor {

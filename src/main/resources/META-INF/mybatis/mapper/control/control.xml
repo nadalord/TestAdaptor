@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.untis.bems.mapper.control.DeviceControlMapper">
+	<insert id="update">
+<!-- 	<![CDATA[ -->
+<!-- 		INSERT INTO POIT_MEASURED_HISTORY_#{buildingMasterIdx} ( -->
+<!-- 			MEASURED_DATE, -->
+<!-- 			MEASURED_TIME,  -->
+<!-- 			POIT_LIST_IX, -->
+<!-- 			POINT_VALUE,  -->
+<!-- 			POINT_CHANGE_VALUE) -->
+<!-- 		VALUES ( -->
+<!-- 			#{history.date},  -->
+<!-- 			#{history.time}, -->
+<!-- 			#{history.pointListIdx}, -->
+<!-- 			#{history.pointValue}, -->
+<!-- 			#{history.pointChangeValue})		 -->
+<!-- 	]]> -->
+	</insert>
+</mapper>

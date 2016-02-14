@@ -13,13 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.untis.bems.BemsAdaptorApplication;
 import com.untis.bems.domain.BemsHistory;
 import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
 import com.untis.bems.service.adaptor.DevicePointService;
-import com.untis.bems.service.bems.BemsHistoryService;
-import com.untis.bems.service.bems.BemsPointService;
+import com.untis.bems.service.adaptor.BemsHistoryService;
+import com.untis.bems.service.adaptor.BemsPointService;
 
 @Service("ShinYoungDDC")
 public class ShinYoungBemsAdaptor implements BemsAdaptor {

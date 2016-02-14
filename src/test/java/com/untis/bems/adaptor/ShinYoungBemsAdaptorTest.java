@@ -4,15 +4,12 @@ import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.untis.bems.AbstractTestableContext;
-import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
 
 public class ShinYoungBemsAdaptorTest extends AbstractTestableContext  {

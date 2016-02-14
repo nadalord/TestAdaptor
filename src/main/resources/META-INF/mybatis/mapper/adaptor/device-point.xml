@@ -17,12 +17,14 @@
 
 	<!-- 포인트 테이블을 통한 신영 DDC 테스트  -->
 	<select id="getAll" resultType="DevicePoint">
+	<![CDATA[
 		SELECT
 			PT_NUM AS pointId,
 			PT_NAME AS pointName,
 			1 AS pointValue
 		FROM dbo.TB_POINT
 		ORDER BY pointId ASC
+	]]>
 	</select>
 	
 </mapper>

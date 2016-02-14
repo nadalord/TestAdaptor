@@ -1,11 +1,8 @@
-package com.untis.bems.mapper.bems;
-
-import java.util.List;
+package com.untis.bems.mapper.adaptor;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.untis.bems.domain.BemsHistory;
-import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.mapper.support.MasterMapper;
 
 @MasterMapper

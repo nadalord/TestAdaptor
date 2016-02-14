@@ -1,4 +1,4 @@
-package com.untis.bems.mapper.bems;
+package com.untis.bems.mapper.adaptor;
 
 import static org.junit.Assert.*;
 
@@ -12,10 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.untis.bems.AbstractTestableContext;
-import com.untis.bems.BemsAdaptorApplication;
 import com.untis.bems.domain.BemsPoint;
-import com.untis.bems.mapper.adaptor.DevicePointMapper;
-import com.untis.bems.service.bems.BemsPointService;
+import com.untis.bems.service.adaptor.BemsPointService;
 
 public class BemsPointMapperTest extends AbstractTestableContext {
 	

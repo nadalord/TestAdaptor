@@ -1,4 +1,4 @@
-package com.untis.bems.mapper.bems;
+package com.untis.bems.mapper.adaptor;
 
 import java.util.List;
 
