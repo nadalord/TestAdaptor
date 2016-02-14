@@ -11,6 +11,7 @@ public class BemsAdaptorApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }

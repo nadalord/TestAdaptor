@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.untis.bems.domain.ControlMessage;
 import com.untis.bems.service.control.DeviceControlAlarmService;
 import com.untis.bems.service.control.DeviceControlService;
 
