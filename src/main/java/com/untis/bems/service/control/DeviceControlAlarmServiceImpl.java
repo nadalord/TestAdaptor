@@ -13,9 +13,9 @@ public class DeviceControlAlarmServiceImpl implements DeviceControlAlarmService 
 	
 	@Override
 	public int occur(int pointListIdx, String value) {
-		 if (controlAlarmMapper.add(pointListIdx, value) > 0) {
-			 return controlAlarmMapper.updateStatus(pointListIdx, "01");
-		 }
+		if (controlAlarmMapper.updateStatus(pointListIdx, "01") > 0) {
+			return controlAlarmMapper.add(pointListIdx, value);
+		}
 		 return 0;
 	}
 }

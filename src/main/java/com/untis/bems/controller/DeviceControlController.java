@@ -28,7 +28,9 @@ public class DeviceControlController {
     	
     	logger.debug("DDC Control Start (pointListIdx : {}, value : {})", pointListIdx, value);
     	
-    	controlAlarmService.occur(pointListIdx, value);
+    	if (controlService.control(pointListIdx, value) > 0) {
+    		controlAlarmService.occur(pointListIdx, value);
+    	}
     	
         return new String("OK");
     }

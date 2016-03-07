@@ -94,7 +94,12 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>com.infiniteautomation</groupId>
+	 		<artifactId>modbus4j</artifactId>
+	        <version>3.0.0</version>
+   		</dependency>
+    </dependencies>
 	
 	<build>
 		<plugins>
@@ -107,6 +112,21 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>modbus-data-source</id>
+            <name>Modbus Dependencies</name>
+            <url>http://mangoautomation.net:9902/maven-repo/</url>
+        </repository>
+    </repositories>
 	
 
 </project>

@@ -13,9 +13,8 @@ import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.DevicePoint;
 
 public class ShinYoungBemsAdaptorTest extends AbstractTestableContext  {
-
+	
 	@Autowired
-	@Qualifier("ShinYoungDDC")
 	BemsAdaptor bemsAdaptor;
 	
 	@Test

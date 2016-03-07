@@ -28,15 +28,10 @@ public class BemsPointServiceImplTest extends AbstractTestableContext {
 	@Test
 	public void testGetList() {
 		List<BemsPoint> bemsPoints = pointService.getList(1, 1);
-		Map<String, DevicePoint> devicePoints = devicePointService.getAll();
+		Map<Integer, DevicePoint> devicePoints = devicePointService.getAll(bemsPoints);
 		
-		for (BemsPoint point : bemsPoints){
-			DevicePoint devicePoint = devicePoints.get(point.getPointId());
-			if (devicePoint != null) {
-				logger.debug("Bems Point [{} : {}]", 
-						point.getPointId(), 
-						point.getPointListIdx());
-			}
+		for (Map.Entry<Integer, DevicePoint> entry : devicePoints.entrySet()) {		
+			logger.debug("Bems Point [{} : {}]", entry.getKey(), entry.getValue().getPointId());
 		}
 	}
 }
