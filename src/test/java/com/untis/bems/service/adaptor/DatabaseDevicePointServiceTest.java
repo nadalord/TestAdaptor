@@ -36,7 +36,7 @@ public class DatabaseDevicePointServiceTest extends AbstractTestableContext {
 		assertTrue(bemsPoints.size() > 1);
 		
 		Map<Integer, DevicePoint> maps = devicePointService.getAll(bemsPoints);
-		assertTrue(maps.size() > 1);
+		assertTrue(maps.size() >= 1);
 		
 		for (Map.Entry<Integer, DevicePoint> entry : maps.entrySet()){
 			logger.debug("DDC Bems Point [{} : {} : {}]", 

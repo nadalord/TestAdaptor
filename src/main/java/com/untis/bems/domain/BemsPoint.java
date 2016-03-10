@@ -8,6 +8,9 @@ public class BemsPoint {
 	String priority;
 	String agentProtocol;
 	String privateIp;
+	int port;
+
+
 
 	public int getPointListIdx() {
 		return pointListIdx;
@@ -63,6 +66,14 @@ public class BemsPoint {
 
 	public void setPrivateIp(String privateIp) {
 		this.privateIp = privateIp;
+	}
+	
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 	@Override

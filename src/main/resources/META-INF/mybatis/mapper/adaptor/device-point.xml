@@ -21,7 +21,7 @@
 		SELECT
 			PT_NUM AS pointId,
 			PT_NAME AS pointName,
-			1 AS pointValue
+			PT_VALUE AS pointValue
 		FROM dbo.TB_POINT
 		ORDER BY pointId ASC
 	]]>
