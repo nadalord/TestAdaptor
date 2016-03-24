@@ -36,6 +36,14 @@ public class ModbusDevicePointServiceTest extends AbstractTestableContext {
 	@Autowired
 	@Qualifier("modbusDevicePoint")
 	DevicePointService devicePointService;
+	
+	public void printHEX(byte[] ba) {
+		byte c;
+		for (int i = 0; i < ba.length; i++) {
+			c = ba[i];
+			System.out.format("%02X", c);
+		}
+	}
 
 	@Test
     public  void readHoldingRegisters() {
@@ -54,19 +62,19 @@ public class ModbusDevicePointServiceTest extends AbstractTestableContext {
 			e1.printStackTrace();
 		}
         
-        try {
-        	
-            ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(1, 10, 2);
-            ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse) master.send(request);
+		try {
+			ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(2, 12, 2);
+			ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse) master.send(request);
 
-            if (response.isException())
-                System.out.println("Exception response: message=" + response.getExceptionMessage());
-            else
-                System.out.println(Arrays.toString(response.getShortData()));
-        }
-        catch (ModbusTransportException e) {
-            e.printStackTrace();
-        }
+			if (response.isException())
+				System.out.println("Exception response: message=" + response.getExceptionMessage());
+			else {
+				System.out.println(Arrays.toString(response.getShortData()));
+				printHEX(response.getData());
+			}
+		} catch (ModbusTransportException e) {
+			e.printStackTrace();
+		}
     }
 		
 	@Test

@@ -8,23 +8,23 @@
 <!-- 		FROM POIT_LIST -->
 <!-- 	</select> -->
 
-<!-- 	<select id="getAll" resultType="DevicePoint"> -->
-<!-- 		SELECT -->
-<!-- 			PT_NUM AS pointId, -->
-<!-- 			PT_VALUE AS pointValue -->
-<!-- 		FROM dbo.TB_CURRENT_VALUE -->
-<!-- 	</select> -->
-
-	<!-- 포인트 테이블을 통한 신영 DDC 테스트  -->
 	<select id="getAll" resultType="DevicePoint">
-	<![CDATA[
 		SELECT
 			PT_NUM AS pointId,
-			PT_NAME AS pointName,
 			PT_VALUE AS pointValue
-		FROM dbo.TB_POINT
-		ORDER BY pointId ASC
-	]]>
+		FROM dbo.TB_CURRENT_VALUE
 	</select>
+
+<!-- 포인트 테이블을 통한 신영 DDC 테스트  -->
+<!-- 	<select id="getAll" resultType="DevicePoint"> -->
+<!-- 	<![CDATA[ -->
+<!-- 		SELECT -->
+<!-- 			PT_NUM AS pointId, -->
+<!-- 			PT_NAME AS pointName, -->
+<!-- 			PT_VALUE AS pointValue -->
+<!-- 		FROM dbo.TB_POINT -->
+<!-- 		ORDER BY pointId ASC -->
+<!-- 	]]> -->
+<!-- 	</select> -->
 	
 </mapper>

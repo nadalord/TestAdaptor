@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.BemsPoint;
@@ -23,6 +24,7 @@ public class BemsPointServiceImplTest extends AbstractTestableContext {
 	BemsPointService pointService;
 	
 	@Autowired
+	@Qualifier("databaseDevicePoint")
 	DevicePointService devicePointService;
 	
 	@Test
