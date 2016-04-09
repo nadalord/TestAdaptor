@@ -11,21 +11,13 @@ public class AgentDatabaseProperties implements DatabaseProperties {
 	public static final String PREFIX = "datasource.agent"; 
 
 	private String driverClassName;
-	
 	private String url;
-	
 	private String userName;
-	
 	private String password;
-	
 	private int initialSize;
-	
 	private int maxActive;
-	
 	private int maxIdle;
-	
 	private int minIdle;
-	
 	private int maxWait;
 
 	public String getDriverClassName() {

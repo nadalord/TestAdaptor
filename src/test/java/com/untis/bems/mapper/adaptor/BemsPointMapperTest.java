@@ -39,5 +39,16 @@ public class BemsPointMapperTest extends AbstractTestableContext {
 //			logger.info("point_id : {}", point.getPointId());
 //		}
 	}
+	
+	@Test
+	public void get() {
+		BemsPoint point = pointService.get(1, 1);
+		
+		logger.info("Test get : {}", point.getPointId());
+	
+//		for (BemsPoint point : points) {
+//			logger.info("point_id : {}", point.getPointId());
+//		}
+	}
 
 }

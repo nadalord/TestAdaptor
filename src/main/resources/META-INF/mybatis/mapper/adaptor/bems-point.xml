@@ -8,11 +8,33 @@
 				PL.OBJECT_CD AS objectId, 
 				PL.PRIMITIVE_TYPE_CD AS primitiveType, 
 				PL.PRIORITY_CD AS priority,
+				AM.AGNT_MASTER_IX as agentMasteridx,
 				AM.AGENT_PROTOCOL_CD AS agentProtocol, 
+				AD.AGNT_DDC_IX AS agentDDCIdx,
 				AD.PRIVATE_IP AS privateIp
 		FROM POIT_LIST AS PL
 		JOIN AGNT_MASTER AS AM ON (AM.BUID_MASTER_IX = ${buidMasterIx} AND AM.AGNT_MASTER_IX = ${agentMasterIx})
 		JOIN AGNT_DDC AS AD ON (AD.AGNT_MASTER_IX = AM.AGNT_MASTER_IX AND AD.AGNT_DDC_IX = PL.AGNT_DDC_IX)
+	]]>
+	</select>
+	
+	<select id="get" resultType="BemsPoint">
+	<![CDATA[
+		SELECT 	PL.POIT_LIST_IX AS pointListIdx,
+				PL.POINT_ID AS pointId, 
+				PL.OBJECT_CD AS objectId, 
+				PL.PRIMITIVE_TYPE_CD AS primitiveType, 
+				PL.PRIORITY_CD AS priority,
+				AM.AGNT_MASTER_IX as agentMasteridx,
+				AM.AGENT_PROTOCOL_CD AS agentProtocol, 
+				AD.AGNT_DDC_IX AS agentDDCIdx,
+				AD.PRIVATE_IP AS privateIp
+		FROM POIT_LIST AS PL, AGNT_DDC AS AD, AGNT_MASTER AS AM 
+		WHERE PL.AGNT_DDC_IX = AD.AGNT_DDC_IX 
+		AND AM.AGNT_MASTER_IX = AD.AGNT_MASTER_IX
+		AND PL.BUID_MASTER_IX = ${buidMasterIx} 
+		AND PL.POIT_LIST_IX = ${pointListIdx}
+		LIMIT 1
 	]]>
 	</select>
 	

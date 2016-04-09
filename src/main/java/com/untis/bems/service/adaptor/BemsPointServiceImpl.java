@@ -15,7 +15,12 @@ public class BemsPointServiceImpl implements BemsPointService {
 	BemsPointMapper pointMapper;	
 
 	@Override
-	public List<BemsPoint> getList(int buidMasterIx, int angetMasterIx) {		
-		return pointMapper.getList(buidMasterIx, angetMasterIx);
+	public List<BemsPoint> getList(int buidMasterIx, int agentMasterIx) {		
+		return pointMapper.getList(buidMasterIx, agentMasterIx);
+	}
+
+	@Override
+	public BemsPoint get(int buidMasterIx, int pointListIdx) {
+		return pointMapper.get(buidMasterIx, pointListIdx);
 	}
 }

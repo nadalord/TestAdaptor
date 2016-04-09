@@ -10,4 +10,5 @@ import com.untis.bems.mapper.support.MasterMapper;
 @MasterMapper
 public interface BemsPointMapper {
 	public List<BemsPoint> getList(@Param("buidMasterIx") int buidMasterIx, @Param("agentMasterIx") int agentMasterIx);
+	public BemsPoint get(@Param("buidMasterIx") int buidMasterIx, @Param("pointListIdx") int pointListIdx);
 }

@@ -23,17 +23,19 @@ public class BemsPointServiceImplTest extends AbstractTestableContext {
 	@Autowired
 	BemsPointService pointService;
 	
-	@Autowired
-	@Qualifier("databaseDevicePoint")
-	DevicePointService devicePointService;
-	
 	@Test
 	public void testGetList() {
 		List<BemsPoint> bemsPoints = pointService.getList(1, 1);
-		Map<Integer, DevicePoint> devicePoints = devicePointService.getAll(bemsPoints);
-		
-		for (Map.Entry<Integer, DevicePoint> entry : devicePoints.entrySet()) {		
-			logger.debug("Bems Point [{} : {}]", entry.getKey(), entry.getValue().getPointId());
+		for (BemsPoint point : bemsPoints) {		
+			logger.debug("Bems Point [poit_list_ix : {}," +
+						 "point_id : {}, " +
+						 "agent_master_idx : {}, " +
+						 "agent_agent_ddc_idx : {}" +
+						 "]", 
+					point.getPointListIdx(), 
+					point.getPointId(), 
+					point.getAgentMasterIdx(),
+					point.getAgentDDCIdx());
 		}
 	}
 }

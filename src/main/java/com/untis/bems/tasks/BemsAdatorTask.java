@@ -28,7 +28,7 @@ public class BemsAdatorTask {
 	@Qualifier("modbusDevicePoint")
 	DevicePointService modbusDevicePointService;
 	
-	@Scheduled(cron="10 */15 * * * *")
+	@Scheduled(cron="0 */15 * * * *")
 	public void run() {
 		bemsAdaptor.run(agentMasterIdx, databaseDevicePointService);
 	}

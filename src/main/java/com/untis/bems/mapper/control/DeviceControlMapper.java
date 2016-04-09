@@ -6,5 +6,6 @@ import com.untis.bems.mapper.support.AgentMapper;
 
 @AgentMapper
 public interface DeviceControlMapper {
-	public int update(@Param("pointListIdx") int pointListIdx, @Param("value") String value);
+	public int update(@Param("pointId") String pointId, @Param("value") String value);
+	public int add(@Param("pointId") String pointId, @Param("value") String value);
 }

@@ -84,7 +84,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -99,6 +98,11 @@
 	 		<artifactId>modbus4j</artifactId>
 	        <version>3.0.0</version>
    		</dependency>
+   		<dependency>
+    		<groupId>net.objecthunter</groupId>
+    		<artifactId>exp4j</artifactId>
+    		<version>0.4.5</version>
+		</dependency>	
     </dependencies>
 	
 	<build>

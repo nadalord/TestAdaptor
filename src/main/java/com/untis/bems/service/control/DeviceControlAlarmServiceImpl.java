@@ -16,6 +16,6 @@ public class DeviceControlAlarmServiceImpl implements DeviceControlAlarmService 
 		if (controlAlarmMapper.updateStatus(pointListIdx, "01") > 0) {
 			return controlAlarmMapper.add(pointListIdx, value);
 		}
-		 return 0;
+		return 0;
 	}
 }

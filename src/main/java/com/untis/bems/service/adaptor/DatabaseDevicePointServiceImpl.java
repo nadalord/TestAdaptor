@@ -26,6 +26,12 @@ public class DatabaseDevicePointServiceImpl implements DevicePointService {
 		return maps;
 	}
 	
+	public DevicePoint get(BemsPoint bemsPoint) {
+		Map<String, DevicePoint> devicePoints = getPointAll();		
+		DevicePoint devicePoint = devicePoints.get(bemsPoint.getPointId());
+		return devicePoint;
+	}
+	
 	public Map<Integer, DevicePoint> getAll(List<BemsPoint> bemsPoints) {
 		Map<String, DevicePoint> devicePoints = getPointAll();	
 		Map<Integer, DevicePoint> maps = new HashMap<Integer, DevicePoint>();

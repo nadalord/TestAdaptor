@@ -12,7 +12,7 @@ public class DeviceControlServiceImpl implements DeviceControlService {
 	DeviceControlMapper controlMapper;
 	
 	@Override
-	public int control(int pointListIdx, String value) {
-		return controlMapper.update(pointListIdx, value);
+	public int control(String pointId, String value) {
+		return controlMapper.add(pointId, value);
 	}
 }
