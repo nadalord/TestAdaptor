@@ -21,7 +21,7 @@ public class BemsAdatorTask {
 	int agentMasterIdx;
 
 	@Autowired
-	@Qualifier("databaseDevicePoint")
+	@Qualifier("shinYoungDatabaseDevicePoint")
 	DevicePointService databaseDevicePointService;
 	
 	@Autowired

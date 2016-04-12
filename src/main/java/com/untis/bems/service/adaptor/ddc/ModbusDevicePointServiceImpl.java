@@ -1,4 +1,4 @@
-package com.untis.bems.service.adaptor;
+package com.untis.bems.service.adaptor.ddc;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +20,7 @@ import com.serotonin.modbus4j.locator.BaseLocator;
 import com.serotonin.modbus4j.locator.NumericLocator;
 import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
+import com.untis.bems.service.adaptor.DevicePointService;
 
 @Service("modbusDevicePoint")
 public class ModbusDevicePointServiceImpl implements DevicePointService {
@@ -76,15 +77,13 @@ public class ModbusDevicePointServiceImpl implements DevicePointService {
 	}
 	
 	public Map<Integer, DevicePoint> getAll(List<BemsPoint> bemsPoints) {		
-		Map<Integer, DevicePoint> maps = new HashMap<Integer, DevicePoint>();
-		
+		Map<Integer, DevicePoint> maps = new HashMap<Integer, DevicePoint>();		
 		for (BemsPoint point : bemsPoints) {
 			ModbusMaster master = initModbus(point.getPrivateIp());
 			DevicePoint devicePoint = getValue(master, point);
 			maps.put(point.getPointListIdx(), devicePoint);
 			master.destroy();
 		}
-	
 		return maps;
 	}
 }

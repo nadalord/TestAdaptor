@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.untis.bems.configure.database;
+package com.untis.bems.configure.database.ddc;
 
 import javax.sql.DataSource;
 
@@ -10,17 +10,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.untis.bems.configure.database.DatabaseConfig;
+
 @Configuration
-@EnableConfigurationProperties(AgentDatabaseProperties.class)
-class AgentDatabaseConfig extends DatabaseConfig {
+@EnableConfigurationProperties(ShinYoungDDCDatabaseProperties.class)
+class ShinYoungDDCDatabaseConfig extends DatabaseConfig {
 	
 	@Autowired
-	private AgentDatabaseProperties agentDatabaseProperties;
+	private ShinYoungDDCDatabaseProperties ddcDatabaseProperties;
 	
-	@Bean(name = "agentDataSource", destroyMethod = "close")
+	@Bean(name = "shinYoungDDCDataSource", destroyMethod = "close")
 	public DataSource dataSource() {
 		org.apache.tomcat.jdbc.pool.DataSource agentDataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-		configureDataSource(agentDataSource, agentDatabaseProperties);
+		configureDataSource(agentDataSource, ddcDatabaseProperties);
 		return agentDataSource;
 	}
 }

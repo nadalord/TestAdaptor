@@ -1,14 +1,16 @@
 /**
  * 
  */
-package com.untis.bems.configure.database;
+package com.untis.bems.configure.database.ddc;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = AgentDatabaseProperties.PREFIX)
-public class AgentDatabaseProperties implements DatabaseProperties {
+import com.untis.bems.configure.database.DatabaseProperties;
 
-	public static final String PREFIX = "datasource.agent"; 
+@ConfigurationProperties(prefix = ShinYoungDDCDatabaseProperties.PREFIX)
+public class ShinYoungDDCDatabaseProperties implements DatabaseProperties {
+
+	public static final String PREFIX = "datasource.ddc.shinyoung"; 
 
 	private String driverClassName;
 	private String url;

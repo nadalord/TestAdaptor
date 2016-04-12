@@ -16,25 +16,23 @@ public class ExpressionParser {
 		this.expressionString = expressionString;
 	}
 
-	public Map<String, String> parseVariables() {
+	public Map<String, String> parseVariables() throws IllegalArgumentException {
 		StringTokenizer expressions = new StringTokenizer(this.expressionString, ",");
 		if (expressions.countTokens() <= 0) {
 			return null;
 		}
 		
 		Map<String, String> variableMap = new HashMap<String, String>();
-		String expression = expressions.nextToken();
-		this.expressionBuilder = new ExpressionBuilder(expression);
+		this.expressionBuilder = new ExpressionBuilder(expressions.nextToken());
 		
 		while (expressions.hasMoreElements()) {
-			StringTokenizer variables = new StringTokenizer(expressions.nextToken(), ":");
+			StringTokenizer variables = new StringTokenizer(expressions.nextToken().trim(), ":");
 			if (variables.countTokens() != 2) {
 				throw new IllegalArgumentException("The expression can not be empty");
 			}
 			String variableName = variables.nextToken();
-			String variableValue = variables.nextToken();
-			variableMap.put(variableName, variableValue);
 			this.expressionBuilder = this.expressionBuilder.variable(variableName);
+			variableMap.put(variableName, variables.nextToken());
 		}
 		this.expression = this.expressionBuilder.build();
 		return variableMap;

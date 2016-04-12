@@ -1,4 +1,4 @@
-package com.untis.bems.configure.mybatis;
+package com.untis.bems.configure.mybatis.ddc;
 
 import javax.sql.DataSource;
 
@@ -9,14 +9,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.untis.bems.mapper.support.AgentMapper;
+import com.untis.bems.configure.mybatis.MyBatisConfig;
+import com.untis.bems.mapper.support.ShinYoungDDCMapper;
 
 @Configuration
-@MapperScan(basePackages = MyBatisConfig.BASE_PACKAGE, annotationClass = AgentMapper.class, sqlSessionFactoryRef = "agentSqlSessionFactory")
-class AgentMyBatisConfig extends MyBatisConfig {
+@MapperScan(basePackages = MyBatisConfig.BASE_PACKAGE, annotationClass = ShinYoungDDCMapper.class, sqlSessionFactoryRef = "shinYoungDDCSqlSessionFactory")
+class ShinYoungDDCMyBatisConfig extends MyBatisConfig {
 	
 	@Bean
-	public SqlSessionFactory agentSqlSessionFactory(@Qualifier("agentDataSource") DataSource agentDataSource) throws Exception {
+	public SqlSessionFactory shinYoungDDCSqlSessionFactory(@Qualifier("shinYoungDDCDataSource") DataSource agentDataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		configureSqlSessionFactory(sessionFactoryBean, agentDataSource);
 		return sessionFactoryBean.getObject();

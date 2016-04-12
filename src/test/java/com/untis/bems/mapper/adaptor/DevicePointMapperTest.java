@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.BemsAdaptorApplication;
 import com.untis.bems.domain.DevicePoint;
+import com.untis.bems.mapper.adaptor.ddc.ShinYoungDevicePointMapper;
 
 public class DevicePointMapperTest extends AbstractTestableContext {
 		
 	private static final Logger logger = LoggerFactory.getLogger(BemsAdaptorApplication.class);
 	
 	@Autowired
-	DevicePointMapper devicePointMapper;
+	ShinYoungDevicePointMapper devicePointMapper;
 
 	@Test
 	public void selectList() {

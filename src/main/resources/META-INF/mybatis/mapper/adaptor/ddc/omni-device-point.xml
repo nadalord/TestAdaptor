@@ -1,0 +1,9 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.untis.bems.mapper.adaptor.ddc.OmniDevicePointMapper">
+	<select id="getAll" resultType="DevicePoint">
+		SELECT
+			DCU_HCU AS pointId,
+			Electric_Meter AS pointValue
+		FROM dbo.TBL_Meter
+	</select>
+</mapper>

@@ -17,15 +17,15 @@ import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
 import com.untis.bems.mapper.adaptor.BemsPointMapperTest;
 
-public class DatabaseDevicePointServiceTest extends AbstractTestableContext {
+public class ShinYoungDatabaseDevicePointServiceTest extends AbstractTestableContext {
 
-	private static final Logger logger = LoggerFactory.getLogger(DatabaseDevicePointServiceTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShinYoungDatabaseDevicePointServiceTest.class);
 	
 	@Autowired
 	BemsPointService bemsPointService;
 	
 	@Autowired
-	@Qualifier("omniDatabaseDevicePoint")
+	@Qualifier("shinYoungDatabaseDevicePoint")
 	DevicePointService devicePointService;
 		
 	@Test
