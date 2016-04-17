@@ -2,7 +2,7 @@ package com.untis.bems.service.adaptor;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
-import com.untis.bems.mapper.adaptor.BemsPointMapperTest;
 
-public class DatabaseDevicePointServiceTest extends AbstractTestableContext {
 
-	private static final Logger logger = LoggerFactory.getLogger(DatabaseDevicePointServiceTest.class);
+public class OmniDatabaseDevicePointServiceTest extends AbstractTestableContext {
+
+	private static final Logger logger = LoggerFactory.getLogger(OmniDatabaseDevicePointServiceTest.class);
 	
 	@Autowired
 	BemsPointService bemsPointService;
@@ -32,7 +32,7 @@ public class DatabaseDevicePointServiceTest extends AbstractTestableContext {
 	public void getAll() {
 		logger.info("Test getAll");
 		
-		List<BemsPoint> bemsPoints = bemsPointService.getList(1, 1);
+		List<BemsPoint> bemsPoints = bemsPointService.getList(1, 3);
 		assertTrue(bemsPoints.size() > 1);
 		
 		Map<Integer, DevicePoint> maps = devicePointService.getAll(bemsPoints);

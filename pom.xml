@@ -24,6 +24,7 @@
 		<mybatis.version>3.3.0</mybatis.version>
     	<mybatis-spring.version>1.2.3</mybatis-spring.version>
     	<spring-boot.version>1.2.6.RELEASE</spring-boot.version>
+    	<maven.test.skip>true</maven.test.skip>
 	</properties>
 
 	<dependencies>

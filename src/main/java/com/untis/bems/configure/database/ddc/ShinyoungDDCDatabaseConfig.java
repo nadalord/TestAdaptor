@@ -13,16 +13,16 @@ import org.springframework.context.annotation.Configuration;
 import com.untis.bems.configure.database.DatabaseConfig;
 
 @Configuration
-@EnableConfigurationProperties(ShinYoungDDCDatabaseProperties.class)
-class ShinYoungDDCDatabaseConfig extends DatabaseConfig {
+@EnableConfigurationProperties(ShinyoungDDCDatabaseProperties.class)
+class ShinyoungDDCDatabaseConfig extends DatabaseConfig {
 	
 	@Autowired
-	private ShinYoungDDCDatabaseProperties ddcDatabaseProperties;
+	private ShinyoungDDCDatabaseProperties shinyoungDDCDatabaseProperties;
 	
-	@Bean(name = "shinYoungDDCDataSource", destroyMethod = "close")
+	@Bean(name = "shinyoungDDCDataSource", destroyMethod = "close")
 	public DataSource dataSource() {
 		org.apache.tomcat.jdbc.pool.DataSource agentDataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-		configureDataSource(agentDataSource, ddcDatabaseProperties);
+		configureDataSource(agentDataSource, shinyoungDDCDatabaseProperties);
 		return agentDataSource;
 	}
 }

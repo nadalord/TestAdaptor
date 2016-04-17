@@ -13,17 +13,22 @@ class ApplicationConfig {
 	private ApplicationProperties applicationProperties;
 
 	@Bean
-	public String ddcName() {
-		return applicationProperties.getDdcName();
-	}
-
-	@Bean
-	public int agentMasterIdx() {
-		return applicationProperties.getAgentMasterIdx();
-	}
-
-	@Bean
 	public int buildingMasterIdx() {
 		return applicationProperties.getBuildingMasterIdx();
+	}
+	
+	@Bean
+	public int agentMasterIdxForShinyoung() {
+		return applicationProperties.getAgentMasterIdxForShinyoung();
+	}
+	
+	@Bean
+	public int agentMasterIdxForOmni() {
+		return applicationProperties.getAgentMasterIdxForOmni();
+	}
+	
+	@Bean
+	public int agentMasterIdxForJunghoTLC() {
+		return applicationProperties.getAgentMasterIdxForJunghoTLC();
 	}
 }

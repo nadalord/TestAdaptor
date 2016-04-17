@@ -7,7 +7,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.untis.bems.AbstractTestableContext;
-import com.untis.bems.domain.DevicePoint;
 
 public class ExpressionParserTest extends AbstractTestableContext {
 

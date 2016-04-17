@@ -20,9 +20,6 @@ public class BemsPointMapperTest extends AbstractTestableContext {
 	private static final Logger logger = LoggerFactory.getLogger(BemsPointMapperTest.class);
 	
 	@Resource
-	int agentMasterIdx;
-	
-	@Resource
 	int buildingMasterIdx;
 	
 	@Autowired

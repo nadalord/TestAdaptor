@@ -7,26 +7,33 @@ public class ApplicationProperties {
 	
 	public static final String PREFIX = "bems.application"; 
 	
-	String ddcName;
-	int agentMasterIdx;
 	int buildingMasterIdx;
+	int agentMasterIdxForShinyoung;
+	int agentMasterIdxForOmni;
+	int agentMasterIdxForJunghoTLC;
 	
-	public String getDdcName() {
-		return ddcName;
-	}
-	public void setDdcName(String ddcName) {
-		this.ddcName = ddcName;
-	}
-	public int getAgentMasterIdx() {
-		return agentMasterIdx;
-	}
-	public void setAgentMasterIdx(int agentMasterIdx) {
-		this.agentMasterIdx = agentMasterIdx;
-	}
 	public int getBuildingMasterIdx() {
 		return buildingMasterIdx;
 	}
 	public void setBuildingMasterIdx(int buildingMasterIdx) {
 		this.buildingMasterIdx = buildingMasterIdx;
+	}
+	public int getAgentMasterIdxForShinyoung() {
+		return agentMasterIdxForShinyoung;
+	}
+	public void setAgentMasterIdxForShinyoung(int agentMasterIdxForShinyoung) {
+		this.agentMasterIdxForShinyoung = agentMasterIdxForShinyoung;
+	}
+	public int getAgentMasterIdxForOmni() {
+		return agentMasterIdxForOmni;
+	}
+	public void setAgentMasterIdxForOmni(int agentMasterIdxForOmni) {
+		this.agentMasterIdxForOmni = agentMasterIdxForOmni;
+	}
+	public int getAgentMasterIdxForJunghoTLC() {
+		return agentMasterIdxForJunghoTLC;
+	}
+	public void setAgentMasterIdxForJunghoTLC(int agentMasterIdxForJunghoTLC) {
+		this.agentMasterIdxForJunghoTLC = agentMasterIdxForJunghoTLC;
 	}
 }

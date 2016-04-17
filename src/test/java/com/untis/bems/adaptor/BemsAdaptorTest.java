@@ -7,7 +7,6 @@ import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.DevicePoint;

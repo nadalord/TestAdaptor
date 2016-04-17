@@ -2,9 +2,10 @@ package com.untis.bems.service.adaptor;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -15,24 +16,26 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.untis.bems.AbstractTestableContext;
 import com.untis.bems.domain.BemsPoint;
 import com.untis.bems.domain.DevicePoint;
-import com.untis.bems.mapper.adaptor.BemsPointMapperTest;
 
-public class ShinYoungDatabaseDevicePointServiceTest extends AbstractTestableContext {
+public class ShinyoungDatabaseDevicePointServiceTest extends AbstractTestableContext {
 
-	private static final Logger logger = LoggerFactory.getLogger(ShinYoungDatabaseDevicePointServiceTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShinyoungDatabaseDevicePointServiceTest.class);
 	
 	@Autowired
 	BemsPointService bemsPointService;
 	
 	@Autowired
-	@Qualifier("shinYoungDatabaseDevicePoint")
+	@Qualifier("shinyoungDatabaseDevicePoint")
 	DevicePointService devicePointService;
+	
+	@Resource
+	int agentMasterIdxForShinyoung;
 		
 	@Test
 	public void getAll() {
 		logger.info("Test getAll");
 		
-		List<BemsPoint> bemsPoints = bemsPointService.getList(1, 1);
+		List<BemsPoint> bemsPoints = bemsPointService.getList(1, agentMasterIdxForShinyoung);
 		assertTrue(bemsPoints.size() > 1);
 		
 		Map<Integer, DevicePoint> maps = devicePointService.getAll(bemsPoints);

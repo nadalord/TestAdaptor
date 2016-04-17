@@ -7,8 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import com.untis.bems.configure.database.DatabaseProperties;
 
-@ConfigurationProperties(prefix = ShinYoungDDCDatabaseProperties.PREFIX)
-public class ShinYoungDDCDatabaseProperties implements DatabaseProperties {
+@ConfigurationProperties(prefix = ShinyoungDDCDatabaseProperties.PREFIX)
+public class ShinyoungDDCDatabaseProperties implements DatabaseProperties {
 
 	public static final String PREFIX = "datasource.ddc.shinyoung"; 
 

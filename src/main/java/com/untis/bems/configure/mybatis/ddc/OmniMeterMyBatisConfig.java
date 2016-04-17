@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.untis.bems.configure.mybatis.MyBatisConfig;
-import com.untis.bems.mapper.support.ShinYoungDDCMapper;
+import com.untis.bems.mapper.support.OmniMeterMapper;
 
 @Configuration
-@MapperScan(basePackages = MyBatisConfig.BASE_PACKAGE, annotationClass = ShinYoungDDCMapper.class, sqlSessionFactoryRef = "shinYoungDDCSqlSessionFactory")
-class ShinYoungDDCMyBatisConfig extends MyBatisConfig {
+@MapperScan(basePackages = MyBatisConfig.BASE_PACKAGE, annotationClass = OmniMeterMapper.class, sqlSessionFactoryRef = "omniMeterSqlSessionFactory")
+class OmniMeterMyBatisConfig extends MyBatisConfig {
 	
 	@Bean
-	public SqlSessionFactory shinYoungDDCSqlSessionFactory(@Qualifier("shinYoungDDCDataSource") DataSource agentDataSource) throws Exception {
+	public SqlSessionFactory omniMeterSqlSessionFactory(@Qualifier("omniMeterDataSource") DataSource agentDataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		configureSqlSessionFactory(sessionFactoryBean, agentDataSource);
 		return sessionFactoryBean.getObject();

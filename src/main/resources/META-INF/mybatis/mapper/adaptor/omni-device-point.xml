@@ -3,7 +3,9 @@
 	<select id="getAll" resultType="DevicePoint">
 		SELECT
 			DCU_HCU AS pointId,
-			Electric_Meter AS pointValue
-		FROM dbo.TBL_Meter
+			HO_CODE AS pointName,
+			ELECTRIC_METER as pointValue
+		FROM dbo.TBL_METER
+		WHERE CONVERT(VARCHAR(13), ENERGY_DATE, 120) = CONVERT(VARCHAR(13), GETDATE(), 120)
 	</select>
 </mapper>

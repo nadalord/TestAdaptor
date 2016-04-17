@@ -18,11 +18,18 @@ public class BemsAdatorTask {
 	BemsAdaptor bemsAdaptor;
 	
 	@Resource
-	int agentMasterIdx;
+	int agentMasterIdxForShinyoung;
 
 	@Autowired
-	@Qualifier("shinYoungDatabaseDevicePoint")
-	DevicePointService databaseDevicePointService;
+	@Qualifier("shinyoungDatabaseDevicePoint")
+	DevicePointService shinyoungDatabaseDevicePointService;
+	
+	@Resource
+	int agentMasterIdxForOmni;
+	
+	@Autowired
+	@Qualifier("omniDatabaseDevicePoint")
+	DevicePointService omniDatabaseDevicePointService;
 	
 	@Autowired
 	@Qualifier("modbusDevicePoint")
@@ -30,6 +37,7 @@ public class BemsAdatorTask {
 	
 	@Scheduled(cron="0 */15 * * * *")
 	public void run() {
-		bemsAdaptor.run(agentMasterIdx, databaseDevicePointService);
+		bemsAdaptor.run(agentMasterIdxForShinyoung, shinyoungDatabaseDevicePointService);
+		bemsAdaptor.run(agentMasterIdxForOmni, omniDatabaseDevicePointService);
 	}
 }
