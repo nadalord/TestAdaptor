@@ -3,8 +3,8 @@ package com.untis.bems.domain;
 public class DevicePoint {		
 	String pointId;	
 	String pointName;
-	String pointValue;	
-	
+	double pointValue;	
+
 	public String getPointId() {
 		return pointId;
 	}
@@ -17,10 +17,10 @@ public class DevicePoint {
 	public void setPointName(String pointName) {
 		this.pointName = pointName;
 	}
-	public String getPointValue() {
+	public double getPointValue() {
 		return pointValue;
 	}
-	public void setPointValue(String pointValue) {
+	public void setPointValue(double pointValue) {
 		this.pointValue = pointValue;
 	}
 }

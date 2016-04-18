@@ -6,6 +6,7 @@ public class BemsPoint {
 	String objectId;
 	String primitiveType;
 	String priority;
+	String formula;
 	int agentMasterIdx;
 	String agentProtocol;
 	int agentDDCIdx;
@@ -41,6 +42,12 @@ public class BemsPoint {
 	}
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+	public String getFormula() {
+		return formula;
+	}
+	public void setFormula(String formula) {
+		this.formula = formula;
 	}
 	public int getAgentMasterIdx() {
 		return agentMasterIdx;

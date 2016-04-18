@@ -47,7 +47,7 @@ public class ExpressionParser {
 		this.expression = this.expression.setVariable(variable, value);
 	}
 	
-	public Double evaluate() {
+	public double evaluate() {
 		return this.expression.evaluate();
 	}
 }

@@ -34,7 +34,7 @@ public class BemsHistoryServiceTest extends AbstractTestableContext  {
 		history.setDate(date);
 		history.setTime(time);
 		history.setPointListIdx(11);
-		history.setPointValue("100.005");
+		history.setPointValue(100.005);
 		
 		assertEquals(bemsHistoryService.add(buildingMasterIdx, history), 1);
 	}

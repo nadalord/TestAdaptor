@@ -26,6 +26,23 @@ public class ExpressionParserTest extends AbstractTestableContext {
 		}
 		Double result = parser.evaluate();
 		System.out.println("Expression : " + result);
-		// assertEquals(result, new Double(16));
+	}
+	
+	@Test
+	public void evaluate2() {
+		ExpressionParser parser = new ExpressionParser("1 + XE, XE:$5");
+		Map<String, String> varMap = parser.parseVariables();
+		for (Map.Entry<String, String> entry : varMap.entrySet()) {
+			String value = entry.getValue();
+			if (value.charAt(0) == '$') {
+				System.out.println("$ 변수");
+				parser.setVariable(entry.getKey(), value.substring(1));
+			} else {
+				parser.setVariable(entry.getKey(), value);
+			}
+			System.out.println(entry.getKey());
+		}
+		Double result = parser.evaluate();
+		System.out.println("Expression : " + result);
 	}
 }

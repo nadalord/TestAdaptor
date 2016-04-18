@@ -4,8 +4,8 @@ public class BemsHistory {
 	String date;
 	String time;
 	int pointListIdx;
-	String pointValue;
-	String pointChangeValue;
+	double pointValue;
+	double pointChangeValue;
 	
 	public String getDate() {
 		return date;
@@ -25,16 +25,16 @@ public class BemsHistory {
 	public void setPointListIdx(int pointListIdx) {
 		this.pointListIdx = pointListIdx;
 	}
-	public String getPointValue() {
+	public double getPointValue() {
 		return pointValue;
 	}
-	public void setPointValue(String pointValue) {
+	public void setPointValue(double pointValue) {
 		this.pointValue = pointValue;
 	}
-	public String getPointChangeValue() {
+	public double getPointChangeValue() {
 		return pointChangeValue;
 	}
-	public void setPointChangeValue(String pointChangeValue) {
+	public void setPointChangeValue(double pointChangeValue) {
 		this.pointChangeValue = pointChangeValue;
 	}
 }

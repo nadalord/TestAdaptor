@@ -66,7 +66,7 @@ public class ModbusDevicePointServiceImpl implements DevicePointService {
 		
 		DevicePoint devicePoint = new DevicePoint();
 		devicePoint.setPointId(bemsPoint.getPointId());
-		devicePoint.setPointValue(resultValue.toString());
+		devicePoint.setPointValue(resultValue.doubleValue());
 		return devicePoint;
 	}
 	
