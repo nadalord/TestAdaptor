@@ -28,7 +28,7 @@ class ApplicationConfig {
 	}
 	
 	@Bean
-	public int agentMasterIdxForJunghoTLC() {
-		return applicationProperties.getAgentMasterIdxForJunghoTLC();
+	public int agentMasterIdxForJunghoTlc() {
+		return applicationProperties.getAgentMasterIdxForJunghoTlc();
 	}
 }

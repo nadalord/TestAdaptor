@@ -33,7 +33,7 @@ public class BemsExpressionParserTest extends AbstractTestableContext {
 		
 		System.out.println("expression result : " +  result);
 		
-		parser.setExpression("10 + XE + Y, XE:$4, Y:1");
+		parser.setExpression("10 + XE + Y, XE:4, Y:1");
 		result = parser.evaluate();
 		
 		System.out.println("expression result2 : " +  result);

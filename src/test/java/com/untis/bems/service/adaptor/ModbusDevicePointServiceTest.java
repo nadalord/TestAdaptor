@@ -2,6 +2,8 @@ package com.untis.bems.service.adaptor;
 
 import static org.junit.Assert.*;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -44,21 +46,29 @@ public class ModbusDevicePointServiceTest extends AbstractTestableContext {
 	}
 	
 
-//	@Test
-//    public  void get() {
-//		BemsPoint bemsPoint = new BemsPoint();
-//		bemsPoint.setPointListIdx(1);
-//		bemsPoint.setPointId("0");
-//		bemsPoint.setPrivateIp("192.168.0.201");
-//		DevicePoint devicePoint = devicePointService.get(bemsPoint);
-//		logger.debug("Device Point : {}, {}", devicePoint.getPointId(), devicePoint.getPointValue());
-//	}
-//	
+	@Test
+    public  void get() {
+		BemsPoint bemsPoint = new BemsPoint();
+		bemsPoint.setPointListIdx(1);
+		bemsPoint.setDeviceId("1");
+		bemsPoint.setFunctionCode(0x04);
+		bemsPoint.setDataType(0x08);
+		bemsPoint.setPointId("32");
+		bemsPoint.setPrivateIp("192.168.0.201");
+		
+		DevicePoint devicePoint = devicePointService.get(bemsPoint);
+		logger.debug("Device Point (TR1) : {}, {}", devicePoint.getPointId(), devicePoint.getPointValue());
+		
+		bemsPoint.setDeviceId("2");
+		devicePoint = devicePointService.get(bemsPoint);
+		logger.debug("Device Point (TR2) : {}, {}", devicePoint.getPointId(), devicePoint.getPointValue());
+	}
+	
 	@Test
     public  void readInputRegistersRequest() throws ModbusInitException, ModbusTransportException {
 		IpParameters ipParameters = new IpParameters();
-		ipParameters.setHost("211.195.187.67");
-		ipParameters.setPort(10502);
+		ipParameters.setHost("192.168.0.201");
+		ipParameters.setPort(502);
 
 		ModbusFactory modbusFactory = new ModbusFactory();
 		ModbusMaster master = modbusFactory.createTcpMaster(ipParameters, false);
@@ -73,30 +83,8 @@ public class ModbusDevicePointServiceTest extends AbstractTestableContext {
 		else {
 			System.out.println("readInputRegistersRequest : " + Arrays.toString(response.getShortData()));
 			printHEX(response.getData());
-			System.out.format("TEST : %f", Float.parseFloat(new String(response.getData())));
+			float f = ByteBuffer.wrap(response.getData()).order(ByteOrder.BIG_ENDIAN).getFloat();
+			System.out.println("TEST : " + f);
 		}
     }
-//	
-//
-//	@Test
-//    public  void readHoldingRegisters() throws ModbusInitException, ModbusTransportException {
-//		IpParameters ipParameters = new IpParameters();
-//		ipParameters.setHost("192.168.0.130");
-//		ipParameters.setPort(502);
-//
-//		ModbusFactory modbusFactory = new ModbusFactory();
-//		ModbusMaster master = modbusFactory.createTcpMaster(ipParameters, false);
-//
-//		master.init();
-//
-//		ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(1, 18, 4);
-//		ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse) master.send(request);
-//
-//		if (response.isException())
-//			System.out.println("readHoldingRegisters Exception response: message=" + response.getExceptionMessage());
-//		else {
-//			System.out.println("readHoldingRegisters : " + Arrays.toString(response.getShortData()));
-//			printHEX(response.getData());
-//		}
-//    }
 }

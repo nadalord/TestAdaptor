@@ -10,7 +10,7 @@ public class ApplicationProperties {
 	int buildingMasterIdx;
 	int agentMasterIdxForShinyoung;
 	int agentMasterIdxForOmni;
-	int agentMasterIdxForJunghoTLC;
+	int agentMasterIdxForJunghoTlc;
 	
 	public int getBuildingMasterIdx() {
 		return buildingMasterIdx;
@@ -30,10 +30,10 @@ public class ApplicationProperties {
 	public void setAgentMasterIdxForOmni(int agentMasterIdxForOmni) {
 		this.agentMasterIdxForOmni = agentMasterIdxForOmni;
 	}
-	public int getAgentMasterIdxForJunghoTLC() {
-		return agentMasterIdxForJunghoTLC;
+	public int getAgentMasterIdxForJunghoTlc() {
+		return agentMasterIdxForJunghoTlc;
 	}
-	public void setAgentMasterIdxForJunghoTLC(int agentMasterIdxForJunghoTLC) {
-		this.agentMasterIdxForJunghoTLC = agentMasterIdxForJunghoTLC;
+	public void setAgentMasterIdxForJunghoTlc(int agentMasterIdxForJunghoTlc) {
+		this.agentMasterIdxForJunghoTlc = agentMasterIdxForJunghoTlc;
 	}
 }

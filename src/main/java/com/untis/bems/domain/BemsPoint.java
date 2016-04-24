@@ -5,6 +5,9 @@ public class BemsPoint {
 	String pointId;
 	String objectId;
 	String primitiveType;
+	String deviceId;
+	int functionCode;
+	int dataType;
 	String priority;
 	String formula;
 	int agentMasterIdx;
@@ -36,6 +39,24 @@ public class BemsPoint {
 	}
 	public void setPrimitiveType(String primitiveType) {
 		this.primitiveType = primitiveType;
+	}
+	public String getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
+	public int getFunctionCode() {
+		return functionCode;
+	}
+	public void setFunctionCode(int functionCode) {
+		this.functionCode = functionCode;
+	}
+	public int getDataType() {
+		return dataType;
+	}
+	public void setDataType(int dataType) {
+		this.dataType = dataType;
 	}
 	public String getPriority() {
 		return priority;

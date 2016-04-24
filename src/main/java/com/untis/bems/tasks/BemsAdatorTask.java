@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import com.untis.bems.adaptor.BemsAdaptor;
 import com.untis.bems.service.adaptor.DevicePointService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +34,24 @@ public class BemsAdatorTask {
 	@Qualifier("omniDatabaseDevicePoint")
 	DevicePointService omniDatabaseDevicePointService;
 	
+	@Resource
+	int agentMasterIdxForJunghoTlc;
+	
 	@Autowired
 	@Qualifier("modbusDevicePoint")
 	DevicePointService modbusDevicePointService;
 	
 	@Scheduled(cron="0 */15 * * * *")
 	public void run() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
+		String date = dateFormat.format(new Date()); 
+		
+		SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss"); 
+		String time = timeFormat.format(new Date()); 
+		
+		bemsAdaptor.setDate(date, time);
 		bemsAdaptor.run(agentMasterIdxForShinyoung, shinyoungDatabaseDevicePointService);
 		bemsAdaptor.run(agentMasterIdxForOmni, omniDatabaseDevicePointService);
+		bemsAdaptor.run(agentMasterIdxForJunghoTlc, modbusDevicePointService);
 	}
 }

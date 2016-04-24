@@ -55,7 +55,10 @@ public class ModbusDevicePointServiceImpl implements DevicePointService {
 		
 		try {
 			// resultValue = master.getValue(new NumericLocator(1, RegisterRange.INPUT_REGISTER, offset, DataType.EIGHT_BYTE_INT_UNSIGNED_SWAPPED));
-			resultValue = master.getValue(new NumericLocator(1, RegisterRange.INPUT_REGISTER, offset, DataType.FOUR_BYTE_INT_UNSIGNED));
+			resultValue = master.getValue(new NumericLocator(Integer.parseInt(bemsPoint.getDeviceId()), 
+					 										 bemsPoint.getFunctionCode(), 
+					 										 offset, 
+					 										 bemsPoint.getDataType()));
 		} catch (ModbusTransportException e) {
 			logger.error("Modbus Transport Error. [IP : {}]", bemsPoint.getPrivateIp());
 			e.printStackTrace();
