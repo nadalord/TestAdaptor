@@ -77,12 +77,14 @@ public class BemsAdaptor {
 			if (bemsPoint.getFormula() == null || bemsPoint.getFormula().isEmpty() == true) {
 				continue;
 			}
-			parser.setExpression(bemsPoint.getFormula());
-			double pointValue = devicePoint.getPointValue() * parser.evaluate();
-			devicePoint.setPointValue(pointValue);
+			
+			String formula  = Double.toString(devicePoint.getPointValue()) + bemsPoint.getFormula();
+			parser.setExpression(formula);
+			double pointValue = parser.evaluate();
+			devicePoint.setPointValue(parser.evaluate());
 			
 			logger.debug("bems formula evaluate. [point_list_idx : {}, formula : {}, point_value : {}", 
-					bemsPoint.getPointListIdx(), bemsPoint.getFormula(), pointValue);
+					bemsPoint.getPointListIdx(), formula, pointValue);
 		}
 	}
 	

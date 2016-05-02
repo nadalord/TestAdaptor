@@ -43,13 +43,7 @@ public class BemsAdatorTask {
 	
 	@Scheduled(cron="0 */15 * * * *")
 	public void run() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); 
-		String date = dateFormat.format(new Date()); 
-		
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss"); 
-		String time = timeFormat.format(new Date()); 
-		
-		bemsAdaptor.setDate(date, time);
+		bemsAdaptor.setCurrentdate();
 		bemsAdaptor.run(agentMasterIdxForShinyoung, shinyoungDatabaseDevicePointService);
 		bemsAdaptor.run(agentMasterIdxForOmni, omniDatabaseDevicePointService);
 		bemsAdaptor.run(agentMasterIdxForJunghoTlc, modbusDevicePointService);

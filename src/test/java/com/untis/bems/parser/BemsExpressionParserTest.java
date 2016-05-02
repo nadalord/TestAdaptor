@@ -27,8 +27,11 @@ public class BemsExpressionParserTest extends AbstractTestableContext {
 		deviceMap.put(2, point);
 		
 		parser.addDataSource("$", deviceMap);
+		
+		double pointValue = 10.0f;
+		String Test = Double.toString(pointValue);
 	
-		parser.setExpression("10 + XE + Y - XE, XE:$1, Y:$2");
+		parser.setExpression(Test + "10 + XE + Y, XE:$1, Y:$2");
 		double result = parser.evaluate();
 		
 		System.out.println("expression result : " +  result);
